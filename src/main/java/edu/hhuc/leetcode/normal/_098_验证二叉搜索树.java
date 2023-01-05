@@ -10,8 +10,10 @@ public class _098_验证二叉搜索树 {
     public static void main(String[] args) {
         System.out.println(Integer.MIN_VALUE);
     }
+
     /**
      * 二叉搜索树的中序遍历结果单调递增
+     *
      * @param root
      * @return
      */
@@ -27,6 +29,7 @@ public class _098_验证二叉搜索树 {
 
     /**
      * 递归
+     *
      * @param root
      * @return
      */
@@ -36,6 +39,7 @@ public class _098_验证二叉搜索树 {
 
     /**
      * 中序遍历更好的写法
+     *
      * @param root
      * @return
      */
@@ -81,6 +85,21 @@ public class _098_验证二叉搜索树 {
         result.addAll(inOrder(root.left));
         result.add(root.val);
         result.addAll(inOrder(root.right));
-        return  result;
+        return result;
+    }
+
+    public boolean solution4(TreeNode root) {
+        if (root == null || (root.left == null && root.right == null)) {
+            return true;
+        }
+        boolean left = solution4(root.left);
+        boolean right = solution4(root.right);
+        if (root.left == null) {
+            return right && root.right.val > root.val;
+        }
+        if (root.right == null) {
+            return left && root.left.val < root.val;
+        }
+        return root.left.val < root.val && root.right.val > root.val && right && left;
     }
 }

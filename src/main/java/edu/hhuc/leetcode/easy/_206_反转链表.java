@@ -30,7 +30,7 @@ public class _206_反转链表 {
         if (head == null || head.next == null) {
             return head;
         }
-        // 求当前链表的反转链表，等于下一个节点的反正链表，然后再拼上当前节点
+        // 求当前链表的反转链表，等于下一个节点的反转链表，然后再拼上当前节点
         ListNode newHead = solution2(head.next);
         head.next.next = head;
         head.next = null;

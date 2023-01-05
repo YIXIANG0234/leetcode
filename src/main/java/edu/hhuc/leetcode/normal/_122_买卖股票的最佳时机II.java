@@ -1,5 +1,7 @@
 package edu.hhuc.leetcode.normal;
 
+import java.util.Stack;
+
 public class _122_买卖股票的最佳时机II {
     public static void main(String[] args) {
         _122_买卖股票的最佳时机II instance = new _122_买卖股票的最佳时机II();
@@ -47,6 +49,7 @@ public class _122_买卖股票的最佳时机II {
 
     /**
      * 动态规划
+     *
      * @param prices
      * @return
      */
@@ -56,9 +59,43 @@ public class _122_买卖股票的最佳时机II {
         dp[0][0] = 0;
         dp[0][1] = -prices[0];
         for (int i = 1; i < prices.length; i++) {
-            dp[i][0] = Math.max(dp[i-1][0], dp[i-1][1] + prices[i]);
-            dp[i][1] = Math.max(dp[i-1][1], dp[i-1][0] - prices[i]);
+            dp[i][0] = Math.max(dp[i - 1][0], dp[i - 1][1] + prices[i]);
+            dp[i][1] = Math.max(dp[i - 1][1], dp[i - 1][0] - prices[i]);
         }
-        return dp[n-1][0];
+        return dp[n - 1][0];
     }
+
+    /**
+     * 单调栈
+     *
+     * @param prices
+     * @return
+     */
+    public int solution4(int[] prices) {
+        int maxProfit = 0;
+        Stack<Integer> stack = new Stack<>();
+        int last = 0;
+        int first = 0;
+        for (int i = 0; i < prices.length; i++) {
+            // 当某天的价格小于栈顶元素时，将栈出空，目的是为了拿到栈顶和栈底的差值计算利润，即整个交易的最大利润等于多个单调栈的利润之和
+            if (!stack.isEmpty() && prices[i] < stack.peek()) {
+                first = stack.peek();
+                while (!stack.isEmpty()) {
+                    first = stack.pop();
+                }
+                maxProfit = maxProfit + (last - first);
+            }
+            stack.push(prices[i]);
+            last = prices[i];
+        }
+        // 如果栈未空的话，处理最后一次交易
+
+        while (!stack.isEmpty()) {
+            first = stack.pop();
+        }
+        maxProfit += last - first;
+        return maxProfit;
+    }
+
+
 }

@@ -2,6 +2,7 @@ package edu.hhuc.leetcode.entity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ListNode {
     public int val;
@@ -25,7 +26,7 @@ public class ListNode {
         }
         ListNode head = null;
         ListNode current = null;
-        for (int i=0; i< values.length; i++) {
+        for (int i = 0; i < values.length; i++) {
             ListNode node = new ListNode(values[i]);
             if (i == 0) {
                 head = node;
@@ -52,5 +53,17 @@ public class ListNode {
     public static void printLinkedList(ListNode head) {
         List<Integer> result = getAllNodes(head);
         System.out.println(result);
+    }
+
+    public static void formatList(ListNode head) {
+        StringBuilder sb = new StringBuilder();
+        while (Objects.nonNull(head)) {
+            sb.append(head.val);
+            if (Objects.nonNull(head.next)) {
+                sb.append("->");
+            }
+            head = head.next;
+        }
+        System.out.println(sb);
     }
 }

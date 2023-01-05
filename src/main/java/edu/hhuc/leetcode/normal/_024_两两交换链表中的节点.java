@@ -6,11 +6,12 @@ public class _024_两两交换链表中的节点 {
     public static void main(String[] args) {
         ListNode head = ListNode.buildLinkedList(1, 2, 3, 4, 5, 9, 11, 8);
         _024_两两交换链表中的节点 instance = new _024_两两交换链表中的节点();
-        ListNode.printLinkedList(instance.solution1(head));
+        ListNode.printLinkedList(instance.solution4(head));
     }
 
     /**
      * 自己想出来的，写法比solution3麻烦，不易理解
+     *
      * @param head
      * @return
      */
@@ -57,6 +58,7 @@ public class _024_两两交换链表中的节点 {
 
     /**
      * 官方写法要简洁一点啊
+     *
      * @param head
      * @return
      */
@@ -74,4 +76,32 @@ public class _024_两两交换链表中的节点 {
         }
         return dummyHead.next;
     }
+
+
+    /**
+     * 二刷
+     * @param head
+     * @return
+     */
+    public ListNode solution4(ListNode head) {
+        ListNode first = head;
+        ListNode second = head == null ? null : head.next;
+        ListNode newHead = second;
+        ListNode prv = null;
+        while (first != null && second != null) {
+            ListNode node1 = first;
+            ListNode node2 = second;
+            first = second.next;
+            second = second.next == null ? null : second.next.next;
+
+            if (prv != null) {
+                prv.next = node2;
+            }
+            node2.next = node1;
+            node1.next = first;
+            prv = node1;
+        }
+        return newHead == null ? head : newHead;
+    }
+
 }
