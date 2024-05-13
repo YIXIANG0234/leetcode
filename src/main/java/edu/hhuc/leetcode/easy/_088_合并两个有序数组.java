@@ -30,7 +30,7 @@ public class _088_合并两个有序数组 {
     }
 
     /**
-     * 品论区解法，代码超简洁
+     * 评论区解法，代码超简洁
      * @param nums1
      * @param m
      * @param nums2

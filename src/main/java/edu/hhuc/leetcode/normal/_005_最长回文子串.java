@@ -54,6 +54,9 @@ public class _005_最长回文子串 {
 
     private String solution3(String s) {
         int len = s.length();
+        if (len < 2) {
+            return s;
+        }
         boolean[][] dp = new boolean[len][len];
         for (int i = 0; i < len; i++) {
             dp[i][i] = true;

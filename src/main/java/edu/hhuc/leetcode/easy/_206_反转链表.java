@@ -36,4 +36,20 @@ public class _206_反转链表 {
         head.next = null;
         return newHead;
     }
+
+    /**
+     * 二刷
+     * @param head
+     * @return
+     */
+    public ListNode solution3(ListNode head) {
+        ListNode result = null;
+        while (head != null) {
+            ListNode prev = head;
+            head = head.next;
+            prev.next = result;
+            result = prev;
+        }
+        return result;
+    }
 }
