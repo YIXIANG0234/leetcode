@@ -1,6 +1,7 @@
 package edu.hhuc.leetcode.easy;
 
 import edu.hhuc.leetcode.entity.TreeNode;
+import edu.hhuc.leetcode.entity.TreeNodeUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,8 +10,8 @@ import java.util.List;
 public class _872_叶子相似的树 {
     public static void main(String[] args) {
         _872_叶子相似的树 instance = new _872_叶子相似的树();
-        TreeNode roo1 = TreeNode.buildTree(Arrays.asList(3, 5, 1, 6, 2, 9, 8, null, null, 7, 4));
-        TreeNode roo2 = TreeNode.buildTree(Arrays.asList(3, 5, 1, 6, 7, 4, 2, null, null, null, null, null, null, 9, 8));
+        TreeNode roo1 = TreeNodeUtils.buildTree(Arrays.asList(3, 5, 1, 6, 2, 9, 8, null, null, 7, 4));
+        TreeNode roo2 = TreeNodeUtils.buildTree(Arrays.asList(3, 5, 1, 6, 7, 4, 2, null, null, null, null, null, null, 9, 8));
         instance.solution1(roo1, roo2);
     }
 

@@ -2,6 +2,7 @@ package edu.hhuc.leetcode.easy;
 
 import com.google.common.collect.Lists;
 import edu.hhuc.leetcode.entity.TreeNode;
+import edu.hhuc.leetcode.entity.TreeNodeUtils;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -11,7 +12,7 @@ import java.util.Queue;
 public class _257_二叉树的所有路径 {
     public static void main(String[] args) {
         List<Integer> list = Lists.newArrayList(1, 2, 3, null, 5);
-        TreeNode root = TreeNode.buildTree(list);
+        TreeNode root = TreeNodeUtils.buildTree(list);
         _257_二叉树的所有路径 instance = new _257_二叉树的所有路径();
         List<String> paths = instance.solution1(root);
         paths.forEach(System.out::println);
@@ -59,7 +60,8 @@ public class _257_二叉树的所有路径 {
 
     public List<String> getAllPath(TreeNode root, String path) {
         if (root.left == null && root.right == null) {
-            return List.of(path);
+            return null;
+            // return List.of(path);
         }
         List<String> result = new ArrayList<>();
         if (root.left != null) {

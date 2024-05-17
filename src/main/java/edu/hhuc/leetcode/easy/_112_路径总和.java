@@ -2,9 +2,8 @@ package edu.hhuc.leetcode.easy;
 
 import com.google.common.collect.Lists;
 import edu.hhuc.leetcode.entity.TreeNode;
-import org.checkerframework.checker.units.qual.A;
+import edu.hhuc.leetcode.entity.TreeNodeUtils;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -13,7 +12,7 @@ public class _112_路径总和 {
 
     public static void main(String[] args) {
         List<Integer> nodes = Lists.newArrayList(5, 4, 8, 11, null, 13, 4, 7, 2, null, null, null, 1);
-        TreeNode root = TreeNode.buildTree(nodes);
+        TreeNode root = TreeNodeUtils.buildTree(nodes);
         System.out.println(root);
         _112_路径总和 instance = new _112_路径总和();
         System.out.println(instance.solution1(root, 22));

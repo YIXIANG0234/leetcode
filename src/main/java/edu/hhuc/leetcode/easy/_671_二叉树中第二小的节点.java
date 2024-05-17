@@ -1,6 +1,7 @@
 package edu.hhuc.leetcode.easy;
 
 import edu.hhuc.leetcode.entity.TreeNode;
+import edu.hhuc.leetcode.entity.TreeNodeUtils;
 
 import java.util.Arrays;
 import java.util.PriorityQueue;
@@ -10,7 +11,7 @@ public class _671_二叉树中第二小的节点 {
 
     public static void main(String[] args) {
         _671_二叉树中第二小的节点 instance = new _671_二叉树中第二小的节点();
-        TreeNode root = TreeNode.buildTree(Arrays.asList(2, 2, 5, null, null, 5, 7));
+        TreeNode root = TreeNodeUtils.buildTree(Arrays.asList(2, 2, 5, null, null, 5, 7));
         instance.solution2(root);
     }
 

@@ -1,6 +1,7 @@
 package edu.hhuc.leetcode.normal;
 
 import edu.hhuc.leetcode.entity.TreeNode;
+import edu.hhuc.leetcode.entity.TreeNodeUtils;
 
 import java.util.*;
 
@@ -10,7 +11,7 @@ public class _236_二叉树的最近公共祖先 {
     private Set<TreeNode> visited = new HashSet<>();
 
     public static void main(String[] args) {
-        TreeNode root = TreeNode.buildTree(Arrays.asList(3,5,1,6,2,0,8,null,null,7,4));
+        TreeNode root = TreeNodeUtils.buildTree(Arrays.asList(3,5,1,6,2,0,8,null,null,7,4));
         TreeNode p = null;
         TreeNode q = null;
         _236_二叉树的最近公共祖先 instance = new _236_二叉树的最近公共祖先();

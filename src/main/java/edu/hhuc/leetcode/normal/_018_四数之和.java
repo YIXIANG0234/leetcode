@@ -1,5 +1,7 @@
 package edu.hhuc.leetcode.normal;
 
+import com.google.common.collect.Lists;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -56,7 +58,7 @@ public class _018_四数之和 {
                         left++;
 
                     } else {
-                        result.add(List.of(nums[i], nums[j], nums[left], nums[right]));
+                        result.add(Lists.newArrayList(nums[i], nums[j], nums[left], nums[right]));
                         // 去重
                         while (left < right && nums[right] == nums[right - 1]) {
                             right--;

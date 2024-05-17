@@ -1,6 +1,7 @@
 package edu.hhuc.leetcode.easy;
 
 import edu.hhuc.leetcode.entity.TreeNode;
+import edu.hhuc.leetcode.entity.TreeNodeUtils;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -8,7 +9,7 @@ import java.util.stream.Collectors;
 public class _501_二叉搜索树中的众数 {
     public static void main(String[] args) {
         _501_二叉搜索树中的众数 instance = new _501_二叉搜索树中的众数();
-        TreeNode root = TreeNode.buildTree(Arrays.asList(1, null, 2, 2));
+        TreeNode root = TreeNodeUtils.buildTree(Arrays.asList(1, null, 2, 2));
         int[] result = instance.solution1(root);
 
         System.out.println(Arrays.toString(result));

@@ -21,7 +21,7 @@ public class _002_华为od_滑动窗口最大和 {
         int[] nums = new int[n];
         Random random = new Random();
         for (int i = 0; i < n; i++) {
-            nums[i] = random.nextInt(-100, 100);
+            nums[i] = random.nextInt(100);
         }
 //        nums = new int[]{72, -46, 54, -4, -18, -56, 30, -74, -44, -66};
         System.out.println("整数数组nums：");

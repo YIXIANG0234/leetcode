@@ -1,6 +1,7 @@
 package edu.hhuc.leetcode.normal;
 
 import edu.hhuc.leetcode.entity.TreeNode;
+import edu.hhuc.leetcode.entity.TreeNodeUtils;
 
 import java.util.*;
 
@@ -8,7 +9,7 @@ public class _102_二叉树的层序遍历 {
 
     public static void main(String[] args) {
         _102_二叉树的层序遍历 instance = new _102_二叉树的层序遍历();
-        TreeNode root = TreeNode.buildTree(Arrays.asList(3,9,20,null,null,15,7));
+        TreeNode root = TreeNodeUtils.buildTree(Arrays.asList(3,9,20,null,null,15,7));
         System.out.println(instance.solution2(root));
     }
 

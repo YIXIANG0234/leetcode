@@ -1,7 +1,9 @@
 package edu.hhuc.leetcode.others;
 
+import com.google.common.collect.Lists;
 import edu.hhuc.leetcode.entity.ListNode;
 import edu.hhuc.leetcode.entity.TreeNode;
+import edu.hhuc.leetcode.entity.TreeNodeUtils;
 
 import java.util.List;
 
@@ -19,7 +21,7 @@ public class 拼多多_二叉搜索树转有序链表 {
 
     public static void main(String[] args) {
         拼多多_二叉搜索树转有序链表 instance = new 拼多多_二叉搜索树转有序链表();
-        TreeNode root = TreeNode.buildTree(List.of(8, 5, 12, 3, 6, 10, 15));
+        TreeNode root = TreeNodeUtils.buildTree(Lists.newArrayList(8, 5, 12, 3, 6, 10, 15));
         ListNode node = instance.solution(root);
         System.out.println("中序遍历结果：" + TreeNode.inOrder(root));
         ListNode.printLinkedList(node);

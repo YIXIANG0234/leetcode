@@ -1,6 +1,7 @@
 package edu.hhuc.leetcode.easy;
 
 import edu.hhuc.leetcode.entity.TreeNode;
+import edu.hhuc.leetcode.entity.TreeNodeUtils;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -10,7 +11,7 @@ public class _653_两数之和IV输入BST {
     Set<Integer> table = new HashSet<>();
     public static void main(String[] args) {
         _653_两数之和IV输入BST instance = new _653_两数之和IV输入BST();
-        TreeNode root = TreeNode.buildTree(Arrays.asList(2, 1, 3));
+        TreeNode root = TreeNodeUtils.buildTree(Arrays.asList(2, 1, 3));
         System.out.println(instance.solution2(root, 4));
     }
 

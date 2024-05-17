@@ -1,17 +1,23 @@
 package edu.hhuc.leetcode.easy;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 
 public class _020_有效的括号 {
     /**
      * 使用栈进行匹配
+     *
      * @param s
      * @return
      */
     public boolean solution1(String s) {
         LinkedList<Character> stack = new LinkedList<>();
-        Map<Character, Character> map = Map.of(')', '(', '}', '{', ']', '[');
+        Map<Character, Character> map = new HashMap<Character, Character>() {{
+            put(')', '(');
+            put('}', '{');
+            put(']', '[');
+        }};
         for (int index = 0; index < s.length(); index++) {
             char ch = s.charAt(index);
             if (!map.containsKey(ch)) {
@@ -27,6 +33,7 @@ public class _020_有效的括号 {
 
     /**
      * 字符串替换的实现方式
+     *
      * @param s
      * @return
      */

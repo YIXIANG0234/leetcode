@@ -19,7 +19,7 @@ public class _013_罗马数字转整数 {
 
     public int solution1(String s) {
         // 1.建表
-        Map<String, Integer> digit = new HashMap<>() {{
+        Map<String, Integer> digit = new HashMap<String, Integer>() {{
             put("I", 1);
             put("V", 5);
             put("X", 10);
@@ -60,7 +60,7 @@ public class _013_罗马数字转整数 {
     }
 
     public int solution2(String s) {
-        Map<Character, Integer> digit = new HashMap<>() {{
+        Map<Character, Integer> digit = new HashMap<Character, Integer>() {{
             put('I', 1);
             put('V', 5);
             put('X', 10);

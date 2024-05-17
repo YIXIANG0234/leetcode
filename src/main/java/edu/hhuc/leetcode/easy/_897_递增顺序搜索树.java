@@ -1,6 +1,7 @@
 package edu.hhuc.leetcode.easy;
 
 import edu.hhuc.leetcode.entity.TreeNode;
+import edu.hhuc.leetcode.entity.TreeNodeUtils;
 
 import java.util.Arrays;
 
@@ -9,7 +10,7 @@ public class _897_递增顺序搜索树 {
     private TreeNode next = null;
 
     public static void main(String[] args) {
-        TreeNode root = TreeNode.buildTree(Arrays.asList(5, 1, 7));
+        TreeNode root = TreeNodeUtils.buildTree(Arrays.asList(5, 1, 7));
         _897_递增顺序搜索树 instance = new _897_递增顺序搜索树();
         instance.increasingBST(root);
 

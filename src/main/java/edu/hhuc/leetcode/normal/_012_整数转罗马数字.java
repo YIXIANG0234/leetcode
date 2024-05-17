@@ -1,5 +1,7 @@
 package edu.hhuc.leetcode.normal;
 
+import com.google.common.collect.Lists;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,7 +21,7 @@ public class _012_整数转罗马数字 {
     }
 
     public String solution1(int num) {
-        Map<Integer, String> roman = new HashMap<>() {{
+        Map<Integer, String> roman = new HashMap<Integer, String>() {{
             put(1000, "M");
             put(1, "I");
             put(5, "V");
@@ -34,7 +36,7 @@ public class _012_整数转罗马数字 {
             put(400, "CD");
             put(900, "CM");
         }};
-        List<Integer> sorted = List.of(1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1);
+        List<Integer> sorted = Lists.newArrayList(1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1);
         StringBuilder result = new StringBuilder();
         while (num > 0) {
             for (int i = 0; i < sorted.size(); i++) {

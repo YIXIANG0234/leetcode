@@ -1,6 +1,7 @@
 package edu.hhuc.leetcode.easy;
 
 import edu.hhuc.leetcode.entity.TreeNode;
+import edu.hhuc.leetcode.entity.TreeNodeUtils;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -10,7 +11,7 @@ public class _530_二叉搜索树的最小绝对差 {
     private TreeNode prev;
     public static void main(String[] args) {
         _530_二叉搜索树的最小绝对差 instance = new _530_二叉搜索树的最小绝对差();
-        TreeNode root = TreeNode.buildTree(Arrays.asList(236, 104, 701, null, 227, null, 911));
+        TreeNode root = TreeNodeUtils.buildTree(Arrays.asList(236, 104, 701, null, 227, null, 911));
         System.out.println(instance.solution3(root));
 
     }

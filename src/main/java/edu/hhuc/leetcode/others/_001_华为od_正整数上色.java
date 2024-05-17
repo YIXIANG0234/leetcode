@@ -20,7 +20,7 @@ public class _001_华为od_正整数上色 {
         int[] nums = new int[n];
         Random random = new Random();
         for (int i = 0; i < n; i++) {
-            nums[i] = random.nextInt(1, 100);
+            nums[i] = random.nextInt(100);
         }
         System.out.println(instance.solution1(n, nums));
     }

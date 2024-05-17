@@ -1,12 +1,14 @@
 package edu.hhuc.leetcode.normal;
 
+import com.google.common.collect.Lists;
+
 import java.util.List;
 
 public class _139_单词拆分 {
 
     public static void main(String[] args) {
         _139_单词拆分 instance = new _139_单词拆分();
-        System.out.println(instance.solution1("applepenapple", List.of("apple", "pen")));
+        System.out.println(instance.solution1("applepenapple", Lists.newArrayList("apple", "pen")));
     }
 
     /**

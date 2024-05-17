@@ -1,13 +1,14 @@
 package edu.hhuc.leetcode.easy;
 
 import edu.hhuc.leetcode.entity.TreeNode;
+import edu.hhuc.leetcode.entity.TreeNodeUtils;
 
 import java.util.Arrays;
 
 public class _617_合并二叉树 {
     public static void main(String[] args) {
-        TreeNode root1 = TreeNode.buildTree(Arrays.asList(1,3,2,5));
-        TreeNode root2 = TreeNode.buildTree(Arrays.asList(2,1,3,null,4,null,7));
+        TreeNode root1 = TreeNodeUtils.buildTree(Arrays.asList(1,3,2,5));
+        TreeNode root2 = TreeNodeUtils.buildTree(Arrays.asList(2,1,3,null,4,null,7));
         _617_合并二叉树 instance = new _617_合并二叉树();
         TreeNode root = instance.solution1(root1, root2);
         TreeNode.printTreePath(root);

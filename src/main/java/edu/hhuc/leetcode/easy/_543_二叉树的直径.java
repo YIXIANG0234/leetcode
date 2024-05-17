@@ -1,12 +1,13 @@
 package edu.hhuc.leetcode.easy;
 
 import edu.hhuc.leetcode.entity.TreeNode;
+import edu.hhuc.leetcode.entity.TreeNodeUtils;
 
 import java.util.Arrays;
 
 public class _543_二叉树的直径 {
     public static void main(String[] args) {
-        TreeNode root = TreeNode.buildTree(Arrays.asList(4, -7, -3, null, null, -9, -3, 9, -7, -4, null, 6, null, -6, -6, null, null, 0, 6, 5, null, 9, null, null, -1, -4, null, null, null, -2));
+        TreeNode root = TreeNodeUtils.buildTree(Arrays.asList(4, -7, -3, null, null, -9, -3, 9, -7, -4, null, 6, null, -6, -6, null, null, 0, 6, 5, null, 9, null, null, -1, -4, null, null, null, -2));
         _543_二叉树的直径 instance = new _543_二叉树的直径();
         System.out.println(instance.diameterOfBinaryTree(root));
     }
