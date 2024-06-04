@@ -9,6 +9,12 @@ package edu.hhuc.leetcode.base.sort;
  */
 public class HeapSort implements Sort {
 
+    /**
+     * 堆排序分两步
+     * 1.建堆，使用自上而下堆方式建一个最大堆
+     * 2.调整堆，每次调整都将目前最大堆元素调整到末尾，调整结束后将得到一个升序堆序列
+     * @param arr
+     */
     @Override
     public void sort(int[] arr) {
         buildMaxHeap(arr);

@@ -11,12 +11,12 @@ import java.util.Arrays;
  */
 public class SortDemo {
     public static void main(String[] args) {
-        int[] arr = Sort.randomArray(20, 100);
+        int[] arr = Sort.randomArray(10, 100);
         // arr = new int[]{33, 98, 29, 92, 85, 1, 66, 28, 43, 58};
         int[] origin = Arrays.copyOf(arr, arr.length);
         System.out.println(Arrays.toString(arr));
         System.out.println(Sort.sorted(arr) ? "该数组有序" : "该数组处于非排序状态");
-        Sort sort = new RadixSort();
+        Sort sort = new HeapSort();
         sort.sort(arr);
         System.out.println(Arrays.toString(arr));
         System.out.println(Sort.sorted(arr) ? "该数组有序" : "该数组处于非排序状态");

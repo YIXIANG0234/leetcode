@@ -3,6 +3,7 @@ package edu.hhuc.leetcode.entity;
 import com.google.common.collect.Lists;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author guwanghuai
@@ -14,7 +15,8 @@ import java.util.*;
 public class TreeNodeUtils {
     public static void main(String[] args) {
         // TreeNode root = buildTree(Lists.newArrayList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15));
-        TreeNode root = randomTree(10);
+        TreeNode root = buildTree(Lists.newArrayList(5,4,3,3,2,2,1,2,1));
+        // TreeNode root = randomTree(10);
         prettyPrintTree(root);
     }
 
@@ -40,6 +42,10 @@ public class TreeNodeUtils {
         }
         System.out.println("随机二叉树序列：" + data);
         return buildTree(data);
+    }
+
+    public static TreeNode buildTree(int[] data) {
+        return buildTree(Arrays.stream(data).boxed().collect(Collectors.toList()));
     }
 
     /**
