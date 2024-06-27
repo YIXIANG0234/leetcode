@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * @author yixiang
+ */
 public class ListNode {
     public int val;
     public ListNode next;
@@ -21,21 +24,13 @@ public class ListNode {
     }
 
     public static ListNode buildLinkedList(int... values) {
-        if (values == null) {
-            return null;
+        ListNode dummyHead = new ListNode(0);
+        ListNode current = dummyHead;
+        for (int num : values) {
+            current.next = new ListNode(num);
+            current = current.next;
         }
-        ListNode head = null;
-        ListNode current = null;
-        for (int i = 0; i < values.length; i++) {
-            ListNode node = new ListNode(values[i]);
-            if (i == 0) {
-                head = node;
-                current = node;
-            }
-            current.next = node;
-            current = node;
-        }
-        return head;
+        return dummyHead.next;
     }
 
     public static List<Integer> getAllNodes(ListNode head) {
