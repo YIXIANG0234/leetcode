@@ -1,6 +1,5 @@
 package edu.hhuc.leetcode.normal;
 
-// TODO: 2022/6/9 未解决
 public class _005_最长回文子串 {
     public static void main(String[] args) {
         _005_最长回文子串 instance = new _005_最长回文子串();
@@ -15,12 +14,11 @@ public class _005_最长回文子串 {
      */
     public String solution1(String s) {
         String maxString = "";
-        int length = s.length();
-        for (int i = 0; i < length; i++) {
-            for (int j = i + 1; j <= length; j++) {
-                String temp = s.substring(i, j);
-                if (isPalindromic(temp) && maxString.length() < temp.length()) {
-                    maxString = temp;
+        for (int i = 0; i < s.length(); i++) {
+            for (int j = i; j < s.length(); j++) {
+                if (isPalindromic(s, i, j)) {
+                    String temp = s.substring(i, j + 1);
+                    maxString = maxString.length() > temp.length() ? maxString : temp;
                 }
             }
         }
@@ -36,36 +34,30 @@ public class _005_最长回文子串 {
     public String solution2(String s) {
         String maxString = "";
         for (int i = 0; i < s.length(); i++) {
-            String len1 = longest(s, i, i);
-            String len2 = longest(s, i, i + 1);
-            String temp = len1.length() > len2.length() ? len1 : len2;
-            maxString = (maxString.length() > temp.length() ? maxString : temp);
+            String s1 = findPalindromic(s, i, i);
+            String s2 = findPalindromic(s, i, i + 1);
+            maxString = maxString.length() > s1.length() ? maxString : s1;
+            maxString = maxString.length() > s2.length() ? maxString : s2;
         }
         return maxString;
     }
 
-    private String longest(String s, int left, int right) {
-        while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
-            left--;
-            right++;
-        }
-        return s.substring(left + 1, right);
-    }
-
-    private String solution3(String s) {
-        int len = s.length();
-        if (len < 2) {
-            return s;
-        }
-        boolean[][] dp = new boolean[len][len];
-        for (int i = 0; i < len; i++) {
-            dp[i][i] = true;
-        }
+    /**
+     * 动态规划：
+     * 假设dp[i][j]表示字符i到j的字串是回文串
+     * 则dp[i-1][j+1]是回文串的条件是，s[i-1] == s[j+1] 且 dp[i][j]是回文串
+     * 时间复杂度和空间复杂度都是O(n^2)
+     * @param s
+     * @return
+     */
+    public String solution3(String s) {
         String maxString = "";
-        for (int right = 1; right < len; right++) {
-            for (int left = 0; left < right; left++) {
-                if (s.charAt(left) == s.charAt(right) && (right-left<=2||dp[left + 1][right - 1])) {
-                    dp[left][right] = true;
+        int len = s.length();
+        int[][] dp = new int[len][len];
+        for (int right = 0; right < len; right++) {
+            for (int left = 0; left <= right; left++) {
+                if (s.charAt(right) == s.charAt(left) && (right - left <= 1 || dp[left + 1][right - 1] == 1)) {
+                    dp[left][right] = 1;
                     String temp = s.substring(left, right + 1);
                     maxString = maxString.length() > temp.length() ? maxString : temp;
                 }
@@ -74,15 +66,22 @@ public class _005_最长回文子串 {
         return maxString;
     }
 
-    private boolean isPalindromic(String s) {
-        int length = s.length();
-        for (int i = 0; i < (length >> 1); i++) {
-            if (s.charAt(i) != s.charAt(length - i - 1)) {
+    private boolean isPalindromic(String s, int start, int end) {
+        while (start < end) {
+            if (s.charAt(start) != s.charAt(end)) {
                 return false;
             }
+            start++;
+            end--;
         }
         return true;
     }
 
-
+    private String findPalindromic(String s, int left, int right) {
+        while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
+            left--;
+            right++;
+        }
+        return s.substring(left + 1, right);
+    }
 }

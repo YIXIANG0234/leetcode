@@ -2,8 +2,6 @@ package edu.hhuc.leetcode.normal;
 
 import edu.hhuc.leetcode.entity.ListNode;
 
-import java.util.Objects;
-
 /**
  * @program: leetcode
  * @ClassName _002_两数相加
@@ -87,5 +85,35 @@ public class _002_两数相加 {
             current.next = node;
         }
         return head.next;
+    }
+
+    /**
+     * 递归解法
+     *
+     * @param l1
+     * @param l2
+     * @return
+     */
+    public ListNode solution3(ListNode l1, ListNode l2) {
+        return recursive(l1, l2, 0);
+    }
+
+    private ListNode recursive(ListNode l1, ListNode l2, int carry) {
+        if (l1 == null && l2 == null && carry == 0) {
+            return null;
+        }
+        int a = l1 == null ? 0 : l1.val;
+        int b = l2 == null ? 0 : l2.val;
+        carry = a + b + carry;
+        ListNode node = new ListNode(carry % 10);
+        carry = carry / 10;
+        if (l1 != null) {
+            l1 = l1.next;
+        }
+        if (l2 != null) {
+            l2 = l2.next;
+        }
+        node.next = recursive(l1, l2, carry);
+        return node;
     }
 }
