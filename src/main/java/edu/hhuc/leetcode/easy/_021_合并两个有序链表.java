@@ -3,6 +3,13 @@ package edu.hhuc.leetcode.easy;
 import edu.hhuc.leetcode.entity.ListNode;
 
 public class _021_合并两个有序链表 {
+    public static void main(String[] args) {
+        _021_合并两个有序链表 instance = new _021_合并两个有序链表();
+        ListNode list1 = ListNode.buildLinkedList(1, 2, 3, 4);
+        ListNode list2 = ListNode.buildLinkedList(0, 3, 4, 7);
+        ListNode.formatList(instance.solution1(list1, list2));
+    }
+
     /**
      * 双指针
      *
@@ -11,43 +18,29 @@ public class _021_合并两个有序链表 {
      * @return
      */
     public ListNode solution1(ListNode list1, ListNode list2) {
-        if (list1 == null) {
-            return list2;
-        }
-        if (list2 == null) {
-            return list1;
-        }
-        ListNode result = new ListNode(-1);
-        ListNode node = result;
+        ListNode head = new ListNode(-1);
+        ListNode current = head;
         while (list1 != null && list2 != null) {
-            if (list1.val > list2.val) {
-                node.next = list2;
-                node = node.next;
-                list2 = list2.next;
-            } else if (list1.val < list2.val) {
-                node.next = list1;
-                node = node.next;
+            if (list1.val <= list2.val) {
+                current.next = list1;
                 list1 = list1.next;
             } else {
-                node.next = list1;
-                node = node.next;
-                list1 = list1.next;
-                node.next = list2;
-                node = node.next;
+                current.next = list2;
                 list2 = list2.next;
             }
+            current = current.next;
         }
         while (list1 != null) {
-            node.next = list1;
-            node = node.next;
+            current.next = list1;
             list1 = list1.next;
+            current = current.next;
         }
         while (list2 != null) {
-            node.next = list2;
-            node = node.next;
+            current.next = list2;
             list2 = list2.next;
+            current = current.next;
         }
-        return result.next;
+        return head.next;
     }
 
     /**

@@ -9,7 +9,8 @@ public class _121_买卖股票的最佳时机 {
     public static void main(String[] args) {
         _121_买卖股票的最佳时机 instance = new _121_买卖股票的最佳时机();
         int[] prices = {7, 1, 5, 3, 6, 4};
-        System.out.println(instance.solution3(prices));
+        // int[] prices = {7, 6, 4, 3, 1};
+        System.out.println(instance.solution5(prices));
     }
 
     /**
@@ -55,6 +56,7 @@ public class _121_买卖股票的最佳时机 {
 
     /**
      * 单调递增栈
+     *
      * @param prices
      * @return
      */
@@ -74,5 +76,28 @@ public class _121_买卖股票的最佳时机 {
             maxProfit = Math.max(maxProfit, stack.peekFirst() - stack.peekLast());
         }
         return maxProfit;
+    }
+
+    public int solution4(int[] prices) {
+        int max = 0;
+        for (int i = 0; i < prices.length; i++) {
+            for (int j = i + 1; j < prices.length; j++) {
+                max = Math.max(max, prices[j] - prices[i]);
+            }
+        }
+        return max;
+    }
+
+    public int solution5(int[] prices) {
+        int max = 0;
+        int index = 0;
+        for (int i = 1; i < prices.length; i++) {
+            if (prices[i] < prices[index]) {
+                index = i;
+                continue;
+            }
+            max = Math.max(max, prices[i] - prices[index]);
+        }
+        return max;
     }
 }

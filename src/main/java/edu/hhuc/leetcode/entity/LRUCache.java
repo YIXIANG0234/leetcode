@@ -10,34 +10,35 @@ import java.util.Map;
  * @description
  * @date 2024/5/11 15:31:51
  */
-public class LRU {
+public class LRUCache {
     public static void main(String[] args) {
-        LRU lru = new LRU(5);
-        lru.put("1", 1);
-        lru.put("2", 2);
-        lru.put("3", 3);
-        lru.put("4", 4);
-        lru.put("5", 5);
+        LRUCache lru = new LRUCache(5);
+        lru.put(1, 1);
+        lru.put(2, 2);
+        lru.put(3, 3);
+        lru.put(4, 4);
+        lru.put(5, 5);
 
-        lru.put("6", 6);
-        lru.get("3");
-        lru.put("7", 7);
+        lru.put(6, 6);
+        lru.get(3);
+        lru.put(7, 7);
 
-        lru.get("5");
-        lru.put("8", 8);
+        lru.get(5);
+        lru.put(8, 8);
     }
 
     private int capacity;
     private int size;
-    private final Map<String, ListNode> cache = new HashMap<>();
-    ListNode head = null;
-    ListNode tail = null;
+    private Map<Integer, ListNode> cache;
+    private ListNode head;
+    private ListNode tail;
 
-    public LRU(int capacity) {
+    public LRUCache(int capacity) {
         this.capacity = capacity;
+        this.cache = new HashMap<>();
     }
 
-    public void put(String key, int value) {
+    public void put(int key, int value) {
         ListNode node = cache.get(key);
         if (node != null) {
             node.val = value;
@@ -46,23 +47,23 @@ public class LRU {
         }
         node = new ListNode(value);
         cache.put(key, node);
-        node.next = head;
         if (head == null) {
             head = node;
             tail = node;
         } else {
+            node.next = head;
             head = node;
         }
         if (size == capacity) {
             ListNode removed = removeTail();
-            cache.remove(removed.val + "");
+            cache.remove(removed.val);
         } else {
             size++;
         }
         ListNode.printLinkedList(head);
     }
 
-    public int get(String key) {
+    public int get(int key) {
         ListNode node = cache.get(key);
         if (node == null) {
             return -1;
@@ -87,9 +88,9 @@ public class LRU {
         while (current.next != tail) {
             current = current.next;
         }
-        ListNode removedNode = tail;
-        tail = current;
+        ListNode node = tail;
         current.next = null;
-        return removedNode;
+        tail = current;
+        return node;
     }
 }

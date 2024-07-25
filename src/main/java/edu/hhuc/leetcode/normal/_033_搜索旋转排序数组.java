@@ -3,8 +3,10 @@ package edu.hhuc.leetcode.normal;
 public class _033_搜索旋转排序数组 {
     public static void main(String[] args) {
         _033_搜索旋转排序数组 instance = new _033_搜索旋转排序数组();
-        int[] nums = {4, 5, 6, 7, 0, 1, 2};
-        System.out.println(instance.solution3(nums, 0));
+        // int[] nums = {4, 5, 6, 7, 0, 1, 2};
+        // int[] nums = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+        int[] nums = {7, 8, 9, 0, 1, 2, 3, 4, 5, 6};
+        System.out.println(instance.solution4(nums, 2));
     }
 
     /**
@@ -86,6 +88,37 @@ public class _033_搜索旋转排序数组 {
                 } else {
                     right = mid - 1;
                 }
+            }
+        }
+        return -1;
+    }
+
+    // {7, 8, 9, 0, 1, 2, 3, 4, 5, 6};
+    public int solution4(int[] nums, int target) {
+        int left = 0;
+        int right = nums.length - 1;
+        while (left <= right) {
+            int mid = (left + right) / 2;
+            if (target == nums[mid]) {
+                return mid;
+            }
+            if (nums[left]<=nums[right]) {
+                if (target<nums[mid]) {
+                    right = mid-1;
+                } else {
+                    left = mid+1;
+                }
+            }
+            if (nums[left]>nums[right]) {
+                if (target<nums[right]) {
+
+                }
+            }
+
+            else if (target < nums[mid]) {
+                right = mid - 1;
+            } else {
+                left = mid + 1;
             }
         }
         return -1;

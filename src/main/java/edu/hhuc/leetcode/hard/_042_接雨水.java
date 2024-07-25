@@ -1,8 +1,15 @@
 package edu.hhuc.leetcode.hard;
 
-// TODO: 2022/6/9 未解决
 public class _042_接雨水 {
-    public int trap(int[] height) {
-        return 0;
+    public static void main(String[] args) {
+        _042_接雨水 instance = new _042_接雨水();
+        int[] height = {4, 2, 0, 3, 2, 5};
+        System.out.println(instance.solution1(height));
+    }
+
+    public int solution1(int[] height) {
+        int sum = 0;
+
+        return sum;
     }
 }

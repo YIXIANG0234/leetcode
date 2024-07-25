@@ -5,8 +5,8 @@ import java.util.Arrays;
 public class _034_在排序数组中查找元素的第一个和最后一个位置 {
     public static void main(String[] args) {
         _034_在排序数组中查找元素的第一个和最后一个位置 instance = new _034_在排序数组中查找元素的第一个和最后一个位置();
-        int[] nums = {1};
-        int[] result = instance.solution1(nums, 1);
+        int[] nums = {5, 7, 7, 8, 8, 10};
+        int[] result = instance.solution2(nums, 8);
         System.out.println(Arrays.toString(result));
     }
 
@@ -36,5 +36,31 @@ public class _034_在排序数组中查找元素的第一个和最后一个位�
 
         }
         return result;
+    }
+
+
+    public int[] solution2(int[] nums, int target) {
+        int left = 0;
+        int right = nums.length - 1;
+        while (left <= right) {
+            int mid = (left + right) / 2;
+            if (nums[mid] == target) {
+                left = mid;
+                right = mid;
+                while (left >= 0 && nums[left] == target) {
+                    left--;
+                }
+                while (right < nums.length && nums[right] == target) {
+                    right++;
+                }
+                return new int[]{left + 1, right - 1};
+            }
+            if (target < nums[mid]) {
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+        return new int[]{-1, -1};
     }
 }

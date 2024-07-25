@@ -11,8 +11,8 @@ public class _046_全排列 {
 
     public static void main(String[] args) {
         _046_全排列 instance = new _046_全排列();
-        int[] nums = {1, 2, 3,4,5};
-        System.out.println(instance.solution1(nums));
+        int[] nums = {1, 2, 3};
+        System.out.println(instance.solution2(nums));
     }
 
     /**
@@ -30,7 +30,7 @@ public class _046_全排列 {
     }
 
     public void permute(int[] nums, List<Integer> possibility, boolean[] judge, int index) {
-        // 当前的排序已经枚举结束，接入结果集中
+        // 当前的排序已经枚举结束，加入结果集中
         if (index == nums.length) {
             result.add(new ArrayList<>(possibility));
             return;
@@ -71,6 +71,29 @@ public class _046_全排列 {
             Collections.swap(output, index, i);
             backtrack(output, index+1, result, length);
             Collections.swap(output, index, i);
+        }
+    }
+
+    public List<List<Integer>> solution3(int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
+        test(nums, new int[nums.length], new ArrayList<>(), result);
+        return result;
+    }
+
+    public void test(int[] nums, int[] valid, List<Integer> list, List<List<Integer>> result) {
+        if (list.size() == nums.length) {
+            result.add(new ArrayList<>(list));
+            return;
+        }
+        for (int i = 0; i < valid.length; i++) {
+            if (valid[i] == -1) {
+                continue;
+            }
+            list.add(nums[i]);
+            valid[i] = -1;
+            test(nums, valid, list, result);
+            valid[i] = 0;
+            list.remove(list.size() - 1);
         }
     }
 }

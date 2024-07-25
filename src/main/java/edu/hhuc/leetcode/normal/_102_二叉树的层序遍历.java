@@ -9,8 +9,9 @@ public class _102_二叉树的层序遍历 {
 
     public static void main(String[] args) {
         _102_二叉树的层序遍历 instance = new _102_二叉树的层序遍历();
-        TreeNode root = TreeNodeUtils.buildTree(Arrays.asList(3,9,20,null,null,15,7));
-        System.out.println(instance.solution2(root));
+        TreeNode root = TreeNodeUtils.randomTree(8);
+        TreeNodeUtils.prettyPrintTree(root);
+        System.out.println(instance.solution3(root));
     }
 
     /**
@@ -69,5 +70,27 @@ public class _102_二叉树的层序遍历 {
         if (root.right != null) {
             dfs(root.right, level+1, result);
         }
+    }
+
+    public List<List<Integer>> solution3(TreeNode root) {
+        List<List<Integer>> result = new ArrayList<>();
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            List<Integer> list = new ArrayList<>();
+            for (int i = 0; i < size; i++) {
+                TreeNode node = queue.remove();
+                list.add(node.val);
+                if (node.left != null) {
+                    queue.add(node.left);
+                }
+                if (node.right != null) {
+                    queue.add(node.right);
+                }
+            }
+            result.add(list);
+        }
+        return result;
     }
 }

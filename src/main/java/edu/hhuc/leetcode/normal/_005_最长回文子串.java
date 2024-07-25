@@ -1,10 +1,9 @@
 package edu.hhuc.leetcode.normal;
 
-// TODO: 2022/6/9 未解决
 public class _005_最长回文子串 {
     public static void main(String[] args) {
         _005_最长回文子串 instance = new _005_最长回文子串();
-        System.out.println(instance.solution3("51233214"));
+        System.out.println(instance.solution4("512232214"));
     }
 
     /**
@@ -54,9 +53,6 @@ public class _005_最长回文子串 {
 
     private String solution3(String s) {
         int len = s.length();
-        if (len < 2) {
-            return s;
-        }
         boolean[][] dp = new boolean[len][len];
         for (int i = 0; i < len; i++) {
             dp[i][i] = true;
@@ -64,7 +60,8 @@ public class _005_最长回文子串 {
         String maxString = "";
         for (int right = 1; right < len; right++) {
             for (int left = 0; left < right; left++) {
-                if (s.charAt(left) == s.charAt(right) && (right-left<=2||dp[left + 1][right - 1])) {
+                // 要特殊考虑相近的两个字符的情况：right - left == 1
+                if (s.charAt(left) == s.charAt(right) && (right - left == 1 || dp[left + 1][right - 1])) {
                     dp[left][right] = true;
                     String temp = s.substring(left, right + 1);
                     maxString = maxString.length() > temp.length() ? maxString : temp;
@@ -84,5 +81,22 @@ public class _005_最长回文子串 {
         return true;
     }
 
-
+    public String solution4(String s) {
+        int len = s.length();
+        int[][] dp = new int[len][len];
+        String maxString = "";
+        for (int i = 0; i < len; i++) {
+            dp[i][i] = 1;
+        }
+        for (int right = 1; right < len; right++) {
+            for (int left = 0; left < right; left++) {
+                if (s.charAt(left) == s.charAt(right) && (right - left == 1 || dp[left + 1][right - 1] == 1)) {
+                    dp[left][right] = 1;
+                    String temp = s.substring(left, right + 1);
+                    maxString = maxString.length() > temp.length() ? maxString : temp;
+                }
+            }
+        }
+        return maxString;
+    }
 }

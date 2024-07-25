@@ -3,7 +3,7 @@ package edu.hhuc.leetcode.normal;
 public class _300_最长递增子序列 {
     public static void main(String[] args) {
         _300_最长递增子序列 instance = new _300_最长递增子序列();
-        int[] nums = {10, 9, 2, 5, 3, 7, 101, 18};
+        int[] nums = {10, 1, 9, 2, 5, 3, 7, 101, 18};
         System.out.println(instance.solution1(nums));
 
     }

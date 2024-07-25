@@ -11,7 +11,9 @@ package edu.hhuc.leetcode.normal;
 public class _647_回文子串 {
     public static void main(String[] args) {
         _647_回文子串 instance = new _647_回文子串();
-        System.out.println(instance.solution2("aaaaa"));
+        // String s = "aaaaa";
+        String s = "aba";
+        System.out.println(instance.solution2(s));
     }
 
     /**

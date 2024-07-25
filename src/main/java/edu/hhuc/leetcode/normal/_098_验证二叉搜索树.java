@@ -1,6 +1,8 @@
 package edu.hhuc.leetcode.normal;
 
+import com.google.common.collect.Lists;
 import edu.hhuc.leetcode.entity.TreeNode;
+import edu.hhuc.leetcode.entity.TreeNodeUtils;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -8,7 +10,12 @@ import java.util.List;
 
 public class _098_验证二叉搜索树 {
     public static void main(String[] args) {
-        System.out.println(Integer.MIN_VALUE);
+        // List<Integer> list = Lists.newArrayList(5, 1, 4, null, null, 3, 6);
+        List<Integer> list = Lists.newArrayList(5, 3, 6, 1, 4);
+        TreeNode root = TreeNodeUtils.buildTree(list);
+        TreeNodeUtils.prettyPrintTree(root);
+        _098_验证二叉搜索树 instance = new _098_验证二叉搜索树();
+        System.out.println(instance.solution4(root));
     }
 
     /**
@@ -64,6 +71,19 @@ public class _098_验证二叉搜索树 {
         return true;
     }
 
+    public boolean solution4(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+        if (root.left != null && root.left.val > root.val) {
+            return false;
+        }
+        if (root.right != null && root.right.val < root.val) {
+            return false;
+        }
+        return solution4(root.left) && solution4(root.right);
+    }
+
     public boolean validTreeRange(TreeNode root, Integer min, Integer max) {
         if (root == null) {
             return true;
@@ -88,18 +108,4 @@ public class _098_验证二叉搜索树 {
         return result;
     }
 
-    public boolean solution4(TreeNode root) {
-        if (root == null || (root.left == null && root.right == null)) {
-            return true;
-        }
-        boolean left = solution4(root.left);
-        boolean right = solution4(root.right);
-        if (root.left == null) {
-            return right && root.right.val > root.val;
-        }
-        if (root.right == null) {
-            return left && root.left.val < root.val;
-        }
-        return root.left.val < root.val && root.right.val > root.val && right && left;
-    }
 }

@@ -1,4 +1,4 @@
-package edu.hhuc.leetcode.easy;
+package edu.hhuc.leetcode.normal;
 
 public class _053_最大子数组和 {
     public static void main(String[] args) {
@@ -41,5 +41,17 @@ public class _053_最大子数组和 {
             maxSum = Math.max(maxSum, prev);
         }
         return maxSum;
+    }
+
+    public int solution3(int[] nums) {
+        int max = 0;
+        for (int i = 0; i < nums.length; i++) {
+            int sum = 0;
+            for (int j = i; j < nums.length; j++) {
+                sum = sum + nums[j];
+                max = Math.max(max, sum);
+            }
+        }
+        return max;
     }
 }

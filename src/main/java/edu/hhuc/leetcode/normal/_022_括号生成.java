@@ -8,6 +8,8 @@ public class _022_括号生成 {
         _022_括号生成 instance = new _022_括号生成();
         char[] chars = ")(()".toCharArray();
         System.out.println(instance.valid(chars));
+        System.out.println(instance.solution1(4));
+        System.out.println(instance.solution2(4));
     }
 
     public List<String> solution1(int n) {
@@ -18,6 +20,7 @@ public class _022_括号生成 {
 
     /**
      * 递归生成所有可能的括号组合，然后将有效组合加入结果集
+     *
      * @param current
      * @param pos
      * @param result
@@ -38,6 +41,7 @@ public class _022_括号生成 {
 
     /**
      * 校验括号有效性
+     *
      * @param current
      * @return
      */
@@ -55,5 +59,24 @@ public class _022_括号生成 {
             }
         }
         return balance == 0;
+    }
+
+    public List<String> solution2(int n) {
+        List<String> result = new ArrayList<>();
+        test(0, 2 * n, new StringBuilder(), result);
+        return result;
+    }
+
+    public void test(int index, int n, StringBuilder sb, List<String> result) {
+        if (sb.length() == n) {
+            if (valid(sb.toString().toCharArray())) {
+                result.add(sb.toString());
+            }
+            return;
+        }
+        test(index + 1, n, sb.append("("), result);
+        sb.deleteCharAt(index);
+        test(index + 1, n, sb.append(")"), result);
+        sb.deleteCharAt(index);
     }
 }

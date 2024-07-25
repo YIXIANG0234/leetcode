@@ -11,7 +11,7 @@ package edu.hhuc.leetcode.normal;
 public class _621_任务调度器 {
     public static void main(String[] args) {
         _621_任务调度器 instance = new _621_任务调度器();
-        System.out.println(instance.solution1(new char[]{'A', 'A', 'A', 'B', 'B', 'B'}, 0));
+        System.out.println(instance.solution1(new char[]{'A', 'A', 'A', 'B', 'B', 'B'}, 2));
     }
 
     public int solution1(char[] tasks, int n) {
@@ -48,5 +48,22 @@ public class _621_任务调度器 {
             }
         }
         return ans;
+    }
+
+    public int solution2(char[] tasks, int n) {
+        int[] cnt = new int[26];
+        int x = 0;
+        for (char c : tasks) {
+            c -= 'A';
+            ++cnt[c];
+            x = Math.max(x, cnt[c]);
+        }
+        int s = 0;
+        for (int v : cnt) {
+            if (v == x) {
+                ++s;
+            }
+        }
+        return Math.max(tasks.length, (x - 1) * (n + 1) + s);
     }
 }

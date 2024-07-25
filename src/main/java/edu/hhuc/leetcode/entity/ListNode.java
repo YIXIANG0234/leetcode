@@ -3,6 +3,7 @@ package edu.hhuc.leetcode.entity;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Random;
 
 /**
  * @author yixiang
@@ -55,10 +56,34 @@ public class ListNode {
         while (Objects.nonNull(head)) {
             sb.append(head.val);
             if (Objects.nonNull(head.next)) {
-                sb.append("->");
+                sb.append(" -> ");
             }
             head = head.next;
         }
         System.out.println(sb);
+    }
+
+    public static ListNode randomList(int size) {
+        Random random = new Random();
+        int[] nums = new int[size];
+        for (int i = 0; i < size; i++) {
+            nums[i] = random.nextInt(100);
+        }
+        return buildLinkedList(nums);
+    }
+
+    public static ListNode join(ListNode headA, ListNode headB) {
+        if (headA == null) {
+            return headB;
+        }
+        if (headB == null) {
+            return headA;
+        }
+        ListNode current = headA;
+        while (current.next != null) {
+            current = current.next;
+        }
+        current.next = headB;
+        return headA;
     }
 }

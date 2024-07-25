@@ -1,14 +1,16 @@
 package edu.hhuc.leetcode.normal;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class _064_最小路径和 {
     public static void main(String[] args) {
         _064_最小路径和 instance = new _064_最小路径和();
         int[][] grid = {{1, 3, 1}, {1, 5, 1}, {4, 2, 1}};
-//        System.out.println(instance.solution2(grid));
-        System.out.println(findK(grid, 5));
-
-        int[][] grid2 = {{1,2,3},{4,5,6}};
-        System.out.println(findK(grid2, 6));
+       System.out.println(instance.solution4(grid));
+//         System.out.println(findK(grid, 5));
+//
+//         int[][] grid2 = {{1,2,3},{4,5,6}};
+//         System.out.println(findK(grid2, 6));
     }
 
     public int solution1(int[][] grid) {
@@ -101,4 +103,49 @@ public class _064_最小路径和 {
         return result;
     }
 
+    /**
+     * 动态规划
+     * @param grid
+     * @return
+     */
+    public int solution3(int[][] grid) {
+        int[][] dp = new int[grid.length][grid[0].length];
+        dp[0][0] = grid[0][0];
+        for (int i = 1; i < grid.length; i++) {
+            dp[i][0] = dp[i - 1][0] + grid[i][0];
+        }
+        for (int j = 1; j < grid[0].length; j++) {
+            dp[0][j] = dp[0][j - 1] + grid[0][j];
+        }
+        for (int i = 1; i < grid.length; i++) {
+            for (int j = 1; j < grid[i].length; j++) {
+                dp[i][j] = Math.min(dp[i - 1][j], dp[i][j - 1]) + grid[i][j];
+            }
+        }
+        return dp[grid.length - 1][grid[0].length - 1];
+    }
+
+    /**
+     * 回溯算法实现
+     * @param grid
+     * @return
+     */
+    public int solution4(int[][] grid) {
+        AtomicInteger result = new AtomicInteger(Integer.MAX_VALUE);
+        backtrace(grid, 0, 0, 0, result);
+        return result.get();
+    }
+
+    public void backtrace(int[][] grid, int i, int j, int total, AtomicInteger result) {
+        if (i == grid.length - 1 && j == grid[0].length - 1) {
+            result.set(Math.min(total + grid[i][j], result.get()));
+        }
+        if (i < grid.length - 1) {
+            backtrace(grid, i + 1, j, total + grid[i][j], result);
+        }
+        if (j < grid[0].length - 1) {
+            backtrace(grid, i, j + 1, total + grid[i][j], result);
+
+        }
+    }
 }

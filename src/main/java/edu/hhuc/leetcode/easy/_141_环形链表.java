@@ -3,9 +3,32 @@ package edu.hhuc.leetcode.easy;
 import edu.hhuc.leetcode.entity.ListNode;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class _141_环形链表 {
+
+    public static void main(String[] args) {
+        _141_环形链表 instance = new _141_环形链表();
+        ListNode head = ListNode.buildLinkedList(1, 2, 3, 4, 5, 6);
+        ListNode node = new ListNode(7);
+        ListNode current = head;
+        while (current.next != null) {
+            if (current.val == 3) {
+                node.next = current;
+            }
+            current = current.next;
+        }
+        current.next = node;
+        System.out.println(instance.solution3(head));
+    }
+
+
+
+
+
+
     /**
      * 借助额外的内存空间判断环
      * @param head
@@ -69,4 +92,30 @@ public class _141_环形链表 {
         }
         return false;
     }
+
+    public boolean solution4(ListNode head) {
+        Set<ListNode> set = new HashSet<>();
+        while (head != null) {
+            if (set.contains(head)) {
+                return true;
+            }
+            set.add(head);
+            head = head.next;
+        }
+        return false;
+    }
+
+    public boolean solution5(ListNode head) {
+        ListNode slow = head;
+        ListNode fast = head;
+        while (fast != null && fast.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+            if (slow == fast) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

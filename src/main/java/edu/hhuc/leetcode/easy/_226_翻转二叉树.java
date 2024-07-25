@@ -1,11 +1,20 @@
 package edu.hhuc.leetcode.easy;
 
 import edu.hhuc.leetcode.entity.TreeNode;
+import edu.hhuc.leetcode.entity.TreeNodeUtils;
 
 import java.util.LinkedList;
 import java.util.Queue;
 
 public class _226_翻转二叉树 {
+    public static void main(String[] args) {
+        _226_翻转二叉树 instance = new _226_翻转二叉树();
+        TreeNode root = TreeNodeUtils.randomTree(5);
+        TreeNodeUtils.prettyPrintTree(root);
+        root = instance.solution2(root);
+        TreeNodeUtils.prettyPrintTree(root);
+    }
+
     public TreeNode solution1(TreeNode root) {
         if (root == null) {
             return null;

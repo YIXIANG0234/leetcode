@@ -7,7 +7,7 @@ public class _206_反转链表 {
     public static void main(String[] args) {
         ListNode head = ListNode.buildLinkedList(1, 2, 3, 4, 5);
         _206_反转链表 instance = new _206_反转链表();
-        ListNode.printLinkedList(instance.solution2(head));
+        ListNode.formatList(instance.solution4(head));
     }
     public ListNode solution1(ListNode head) {
         ListNode result = null;
@@ -51,5 +51,16 @@ public class _206_反转链表 {
             result = prev;
         }
         return result;
+    }
+
+    public ListNode solution4(ListNode head) {
+        ListNode current = null;
+        while (head != null) {
+            ListNode next = head.next;
+            head.next = current;
+            current = head;
+            head = next;
+        }
+        return current;
     }
 }

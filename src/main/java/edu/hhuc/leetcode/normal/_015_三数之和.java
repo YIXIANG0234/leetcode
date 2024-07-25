@@ -1,15 +1,15 @@
 package edu.hhuc.leetcode.normal;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import com.google.common.collect.Lists;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class _015_三数之和 {
     public static void main(String[] args) {
         int[] nums = {-4, -2, 1, -5, -4, -4, 4, -2, 0, 4, 0, -2, 3, 1, -5, 0};
         _015_三数之和 instance = new _015_三数之和();
-        System.out.println(instance.solution2(nums));
+        System.out.println(instance.solution3(nums));
     }
 
     /**
@@ -20,26 +20,17 @@ public class _015_三数之和 {
      */
     public List<List<Integer>> solution1(int[] nums) {
         List<List<Integer>> result = new ArrayList<>();
-        for (int i = 0; i < nums.length - 2; i++) {
-            int a = nums[i];
-            for (int j = i + 1; j < nums.length - 1; j++) {
-                int b = nums[j];
-                for (int k = j + 1; k < nums.length; k++) {
-                    int c = nums[k];
-                    if (a + b + c == 0) {
-                        List list = Arrays.asList(a, b, c);
-                        Collections.sort(list);
-                        boolean[] flag = {false};
-                        result.stream().forEach(x -> {
-                            if (x.equals(list)) {
-                                flag[0] = true;
-                                return;
-                            }
-                        });
-                        if (!flag[0]) {
-                            List item = Arrays.asList(a, b, c);
-                            Collections.sort(item);
-                            result.add(item);
+        Set<String> exists = new HashSet<>();
+        int len = nums.length;
+        for (int i = 0; i < len; i++) {
+            for (int j = i + 1; j < len; j++) {
+                for (int k = j + 1; k < len; k++) {
+                    if (nums[i] + nums[j] + nums[k] == 0) {
+                        List<Integer> list = Lists.newArrayList(nums[i], nums[j], nums[k]);
+                        String s = list.stream().sorted().map(String::valueOf).collect(Collectors.joining(","));
+                        if (!exists.contains(s)) {
+                            exists.add(s);
+                            result.add(list);
                         }
                     }
                 }
@@ -50,6 +41,7 @@ public class _015_三数之和 {
 
     /**
      * 先排序，然后使用两个指针查找
+     *
      * @param nums
      * @return
      */
@@ -58,7 +50,7 @@ public class _015_三数之和 {
         List<List<Integer>> result = new ArrayList<>();
         for (int i = 0; i < nums.length - 2; i++) {
             // 去除重复的元组
-            if (i > 0 && nums[i-1] == nums[i]) {
+            if (i > 0 && nums[i - 1] == nums[i]) {
                 continue;
             }
             int left = i + 1;
@@ -80,6 +72,36 @@ public class _015_三数之和 {
                     }
                     left++;
                     right--;
+                }
+            }
+        }
+        return result;
+    }
+
+    /**
+     * 仍然是三重循环去枚举符合条件的，不重复的三元组，但是省去了查重的消耗，是对solution1的优化
+     *
+     * @param nums
+     * @return
+     */
+    public List<List<Integer>> solution3(int[] nums) {
+        Arrays.sort(nums);
+        List<List<Integer>> result = new ArrayList<>();
+        for (int i = 0; i < nums.length; i++) {
+            if (i != 0 && nums[i] == nums[i - 1]) {
+                continue;
+            }
+            for (int j = i + 1; j < nums.length; j++) {
+                if (j != i + 1 && nums[j] == nums[j - 1]) {
+                    continue;
+                }
+                for (int k = j + 1; k < nums.length; k++) {
+                    if (k != j + 1 && nums[k] == nums[k - 1]) {
+                        continue;
+                    }
+                    if (nums[i] + nums[j] + nums[k] == 0) {
+                        result.add(Lists.newArrayList(nums[i], nums[j], nums[k]));
+                    }
                 }
             }
         }

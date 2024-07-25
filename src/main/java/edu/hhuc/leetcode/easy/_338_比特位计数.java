@@ -10,6 +10,7 @@ public class _338_比特位计数 {
 
     /**
      * 逐位判断
+     *
      * @param n
      * @return
      */
@@ -30,5 +31,20 @@ public class _338_比特位计数 {
             num = num >> 1;
         }
         return count;
+    }
+
+    public int[] solution2(int n) {
+        int[] result = new int[n + 1];
+        for (int i = 0; i <= n; i++) {
+            String s = Integer.toBinaryString(i);
+            int count = 0;
+            for (int j = 0; j < s.length(); j++) {
+                if (s.charAt(j) == '1') {
+                    count++;
+                }
+            }
+            result[i] = count;
+        }
+        return result;
     }
 }

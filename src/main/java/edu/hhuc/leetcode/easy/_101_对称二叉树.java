@@ -1,21 +1,16 @@
 package edu.hhuc.leetcode.easy;
 
 import edu.hhuc.leetcode.entity.TreeNode;
+import edu.hhuc.leetcode.entity.TreeNodeUtils;
 
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 public class _101_对称二叉树 {
     public static void main(String[] args) {
-        TreeNode node3_1 = new TreeNode(3);
-        TreeNode node3_2 = new TreeNode(3);
-        TreeNode node4_1 = new TreeNode(4);
-        TreeNode node4_2 = new TreeNode(4);
-        TreeNode node2_1 = new TreeNode(2, node3_1, node4_1);
-        TreeNode node2_2 = new TreeNode(2, node4_2, node3_2);
-        TreeNode node1 = new TreeNode(1, node2_1, node2_2);
+        TreeNode root = TreeNodeUtils.buildTree(new int[]{1,2,2,3,4,4,3});
+        TreeNodeUtils.prettyPrintTree(root);
         _101_对称二叉树 instance = new _101_对称二叉树();
-        System.out.println(instance.solution2(node1));
+        System.out.println(instance.solution4(root));
 
     }
     /**
@@ -104,5 +99,43 @@ public class _101_对称二叉树 {
             return false;
         }
         return isSymmetric(root1.left, root2.right) && isSymmetric(root1.right, root2.left);
+    }
+
+    public boolean solution4(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+        return test(root.left, root.right);
+    }
+
+    public boolean solution5(TreeNode root) {
+        List<Integer> result = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<>();
+        while (!stack.isEmpty() || root != null) {
+            while (root != null) {
+                stack.push(root);
+                root = root.left;
+            }
+            root = stack.pop();
+            result.add(root.val);
+            root = root.right;
+        }
+        int size = result.size();
+        for (int i = 0; i < size / 2; i++) {
+            if (!result.get(i).equals(result.get(size - i - 1))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean test(TreeNode left, TreeNode right) {
+        if (left == null && right == null) {
+            return true;
+        }
+        if (left == null || right == null) {
+            return false;
+        }
+        return left.val == right.val && test(left.left, right.right) && test(left.right, right.left);
     }
 }

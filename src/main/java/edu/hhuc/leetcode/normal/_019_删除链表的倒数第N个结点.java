@@ -5,6 +5,13 @@ import edu.hhuc.leetcode.entity.ListNode;
 import java.util.Stack;
 
 public class _019_删除链表的倒数第N个结点 {
+
+    public static void main(String[] args) {
+        _019_删除链表的倒数第N个结点 instance = new _019_删除链表的倒数第N个结点();
+        ListNode head = ListNode.buildLinkedList(1,2,3,4,5,6,7);
+        ListNode.formatList(head);
+        ListNode.formatList(instance.solution3(head, 3));
+    }
     /**
      * 删除倒数第n个节点，可以转换为删除正数第m个节点
      *
@@ -54,7 +61,7 @@ public class _019_删除链表的倒数第N个结点 {
             n--;
         }
         // 如果栈空，则表示删除第一个元素
-        if (stack.isEmpty()){
+        if (stack.isEmpty()) {
             return head.next;
         }
         // 删除倒数第n个元素
@@ -64,10 +71,10 @@ public class _019_删除链表的倒数第N个结点 {
     }
 
     /**
-     * 双指针，假设链表长度为m+n,m为整数的m个节点，n为倒数的n个节点
-     * first指针先走n个节点，然后second指针加入，first和second一起往后走，等到first走到链表结尾的时候有
-     * first走的节点数为m+n,因为first比second领先n-1个节点，所以second走的节点数为(m+n)-(n-1)=m+1,此时
-     * second正好位于倒数第n个节点处，即删除的节点处
+     * 双指针，假设链表长度为m+n,m为正数的m个节点，n为倒数的n个节点
+     * first指针先走n个节点，然后second指针加入，first和second一起往后走，等到first走到链表结尾的时候
+     * first走的节点数为m+n,因为first比second领先n个节点，所以second走的节点数为(m+n)-n=m,此时
+     * second正好位于整数第m个节点处，即倒数第n+1个节点处，到达删除的节点的前继节点
      *
      * @param head
      * @param n

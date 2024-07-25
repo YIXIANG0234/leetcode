@@ -14,7 +14,7 @@ import java.util.List;
 public class _039_组合总和 {
     public static void main(String[] args) {
         _039_组合总和 instance = new _039_组合总和();
-        System.out.println(instance.solution1(new int[]{2, 3, 5, 8}, 8));
+        System.out.println(instance.solution2(new int[]{2, 3, 5, 8}, 8));
     }
 
     public List<List<Integer>> solution1(int[] candidates, int target) {
@@ -38,5 +38,27 @@ public class _039_组合总和 {
             combination.remove(combination.size() - 1);
         }
         backTrace(combinations, combination, candidates, target, index + 1);
+    }
+
+    public List<List<Integer>> solution2(int[] candidates, int target) {
+        List<List<Integer>> result = new ArrayList<>();
+        test(candidates, 0, target, new ArrayList<>(), result);
+        return result;
+    }
+
+    public void test(int[] candidates, int index, int target, List<Integer> list, List<List<Integer>> result) {
+        if (target == 0) {
+            result.add(new ArrayList<>(list));
+            return;
+        }
+        if (index == candidates.length) {
+            return;
+        }
+        if (target - candidates[index] >= 0) {
+            list.add(candidates[index]);
+            test(candidates, index, target - candidates[index], list, result);
+            list.remove(list.size() - 1);
+        }
+        test(candidates, index + 1, target, list, result);
     }
 }

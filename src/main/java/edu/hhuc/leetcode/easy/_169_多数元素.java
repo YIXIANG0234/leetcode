@@ -8,7 +8,7 @@ public class _169_多数元素 {
 
     public static void main(String[] args) {
         _169_多数元素 instance = new _169_多数元素();
-        System.out.println(instance.solution3(new int[]{7,3,3,5,3,4,3}));
+        System.out.println(instance.solution5(new int[]{7, 3, 3, 5, 3, 4, 3}));
     }
 
     /**
@@ -48,6 +48,7 @@ public class _169_多数元素 {
 
     /**
      * 投票法
+     *
      * @param nums
      * @return
      */
@@ -63,4 +64,23 @@ public class _169_多数元素 {
         return candidate;
     }
 
+    public int solution4(int[] nums) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int num : nums) {
+            map.put(num, map.getOrDefault(num, 0) + 1);
+        }
+        int[] result = new int[1];
+        map.forEach((k, v) -> {
+            if (v > nums.length / 2) {
+                result[0] = k;
+            }
+        });
+        return result[0];
+    }
+
+    public int solution5(int[] nums) {
+        Arrays.sort(nums);
+        int len = nums.length;
+        return nums[len/2];
+    }
 }

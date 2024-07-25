@@ -1,9 +1,6 @@
 package edu.hhuc.leetcode.hard;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.PriorityQueue;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class _239_滑动窗口最大值 {
@@ -11,9 +8,10 @@ public class _239_滑动窗口最大值 {
         int[] nums = {1, 3, -1, -3, 5, 3, 6, 7};
         int k = 3;
         _239_滑动窗口最大值 instance = new _239_滑动窗口最大值();
-        int[] result = instance.solution1(nums, k);
+        int[] result = instance.solution4(nums, k);
         System.out.println(Arrays.toString(result));
     }
+
 
     /**
      * 最直接的想法，需要排序，会超时
@@ -109,12 +107,21 @@ public class _239_滑动窗口最大值 {
     }
 
     /**
-     * todo 双端队列的实现方式，未实现
+     * 暴力枚举
      * @param nums
      * @param k
      * @return
      */
     public int[] solution4(int[] nums, int k) {
-        return nums;
+        int len = nums.length;
+        int[] answer = new int[len - k + 1];
+        for (int i = k - 1; i < len; i++) {
+            int max = nums[i];
+            for (int j = i - k + 1; j <= i; j++) {
+                max = Math.max(max, nums[j]);
+            }
+            answer[i - k + 1] = max;
+        }
+        return answer;
     }
 }

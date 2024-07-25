@@ -1,6 +1,7 @@
 package edu.hhuc.leetcode.easy;
 
 import edu.hhuc.leetcode.entity.TreeNode;
+import edu.hhuc.leetcode.entity.TreeNodeUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,11 +10,10 @@ import java.util.Stack;
 public class _094_二叉树的中序遍历 {
 
     public static void main(String[] args) {
-        TreeNode node3 = new TreeNode(3, null, null);
-        TreeNode node2 = new TreeNode(2, node3, null);
-        TreeNode node1 = new TreeNode(1, null, node2);
+        TreeNode root = TreeNodeUtils.buildTree(new int[]{24, 83, 44, 34, 80, 16});
+        TreeNodeUtils.prettyPrintTree(root);
         _094_二叉树的中序遍历 instance = new _094_二叉树的中序遍历();
-        List<Integer> result = instance.solution1(node1);
+        List<Integer> result = instance.solution1(root);
         System.out.println(result);
     }
 
@@ -21,16 +21,13 @@ public class _094_二叉树的中序遍历 {
     /**
      * 非递归的中序遍历方式
      * 中序遍历：左子树->根节点->右子树
+     *
      * @param root
      * @return
      */
     public List<Integer> solution1(TreeNode root) {
-        if (root == null) {
-            return new ArrayList<>();
-        }
         Stack<TreeNode> stack = new Stack<>();
         List<Integer> result = new ArrayList<>();
-
         while (!stack.isEmpty() || root != null) {
             while (root != null) {
                 stack.push(root);
@@ -45,6 +42,7 @@ public class _094_二叉树的中序遍历 {
 
     /**
      * 递归的中序遍历
+     *
      * @param root
      * @return
      */
