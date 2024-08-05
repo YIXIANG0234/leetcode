@@ -11,68 +11,71 @@ import edu.hhuc.leetcode.entity.ListNode;
  * @Version 1.0
  */
 public class _002_两数相加 {
+    public static void main(String[] args) {
+        ListNode node1 = ListNode.buildLinkedList(1, 4, 8, 9);
+        ListNode node2 = ListNode.buildLinkedList(5, 7, 3, 9, 0, 1, 7);
+        _002_两数相加 instance = new _002_两数相加();
+        ListNode result = instance.solution3(node1, node2);
+        ListNode.printLinkedList(result);
+    }
 
+    /**
+     * 比较容易理解的写法啦
+     *
+     * @param l1
+     * @param l2
+     * @return
+     */
     public ListNode solution1(ListNode l1, ListNode l2) {
-        ListNode head = null;
-        ListNode current = null;
         int carry = 0;
+        ListNode head = new ListNode(-1);
+        ListNode current = head;
         while (l1 != null && l2 != null) {
-            int sum = l1.val + l2.val + carry;
-            carry = sum / 10;
-            ListNode node = new ListNode(sum % 10);
-            if (head == null) {
-                head = node;
-                current = node;
-            } else {
-                current.next = node;
-                current = node;
-            }
+            carry = l1.val + l2.val + carry;
+            current.next = new ListNode(carry % 10);
+            carry = carry / 10;
+            current = current.next;
             l1 = l1.next;
             l2 = l2.next;
         }
         while (l1 != null) {
-            int sum = l1.val + carry;
-            carry = sum / 10;
-            ListNode node = new ListNode(sum % 10);
-            current.next = node;
-            current = node;
+            carry = l1.val + carry;
+            current.next = new ListNode(carry % 10);
+            carry = carry / 10;
+            current = current.next;
             l1 = l1.next;
         }
         while (l2 != null) {
-            int sum = l2.val + carry;
-            carry = sum / 10;
-            ListNode node = new ListNode(sum % 10);
-            current.next = node;
-            current = node;
+            carry = l2.val + carry;
+            current.next = new ListNode(carry % 10);
+            carry = carry / 10;
+            current = current.next;
             l2 = l2.next;
         }
         if (carry != 0) {
-            ListNode node = new ListNode(carry);
-            current.next = node;
+            current.next = new ListNode(carry);
         }
-        return head;
+        return head.next;
     }
 
     /**
-     * 优化版，将多个while循环合并
+     * 思路和solution1完全一致，但是写法更加简洁
      *
      * @param l1
      * @param l2
      * @return
      */
     public ListNode solution2(ListNode l1, ListNode l2) {
-        // 设置哑节点
-        ListNode head = new ListNode(0);
-        ListNode current = head;
         int carry = 0;
+        ListNode head = new ListNode(-1);
+        ListNode current = head;
         while (l1 != null || l2 != null) {
             int a = l1 == null ? 0 : l1.val;
             int b = l2 == null ? 0 : l2.val;
-            int sum = a + b + carry;
-            carry = sum / 10;
-            ListNode node = new ListNode(sum % 10);
-            current.next = node;
+            carry = a + b + carry;
+            current.next = new ListNode(carry % 10);
             current = current.next;
+            carry = carry / 10;
             if (l1 != null) {
                 l1 = l1.next;
             }
@@ -81,8 +84,7 @@ public class _002_两数相加 {
             }
         }
         if (carry != 0) {
-            ListNode node = new ListNode(carry);
-            current.next = node;
+            current.next = new ListNode(carry);
         }
         return head.next;
     }
