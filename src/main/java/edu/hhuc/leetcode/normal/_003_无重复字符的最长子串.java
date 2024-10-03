@@ -1,8 +1,6 @@
 package edu.hhuc.leetcode.normal;
 
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 /**
@@ -16,7 +14,7 @@ import java.util.Set;
 public class _003_无重复字符的最长子串 {
     public static void main(String[] args) {
         _003_无重复字符的最长子串 instance = new _003_无重复字符的最长子串();
-        System.out.println(instance.solution3("abcabcbb"));
+        System.out.println(instance.solution2("abcabcbb"));
     }
 
     /**
@@ -28,73 +26,39 @@ public class _003_无重复字符的最长子串 {
     public int solution1(String s) {
         int maxLength = 0;
         for (int i = 0; i < s.length(); i++) {
-            Set<Character> chars = new HashSet<>();
-            int j = i;
-            for (; j < s.length(); j++) {
-                if (chars.contains(s.charAt(j))) {
+            Set<Character> set = new HashSet<>();
+            for (int j = i; j < s.length(); j++) {
+                if (set.contains(s.charAt(j))) {
                     break;
                 }
-                chars.add(s.charAt(j));
+                maxLength = Math.max(maxLength, j - i + 1);
+                set.add(s.charAt(j));
             }
-            maxLength = Math.max(maxLength, j - i);
         }
         return maxLength;
     }
 
     /**
-     * 针对solution1进行优化
+     * 双指针解法，分别枚举子串的左边界和右边界
+     * 当没有重复字符的时候，一直扩展右边界
+     * 当出现重复 字符的时候，向右调整左边界
      *
      * @param s
      * @return
      */
     public int solution2(String s) {
-        int i = 0;
+        int left = 0;
+        int right = 0;
         int maxLength = 0;
-        while (i < s.length()) {
-            int j = i;
-            Map<Character, Integer> chars = new HashMap<>();
-            while (j < s.length()) {
-                if (chars.containsKey(s.charAt(j))) {
-                    // 直接跳过当前重复的字符，到下一个字符
-                    maxLength = Math.max(maxLength, j - i);
-                    i = chars.get(s.charAt(j)) + 1;
-                    break;
-                }
-                chars.put(s.charAt(j), j);
-                j++;
+        Set<Character> set = new HashSet<>();
+        while (right < s.length()) {
+            while (set.contains(s.charAt(right))) {
+                set.remove(s.charAt(left));
+                left++;
             }
-            // 遍历到最后了，都没重复的，不用再枚举下一个字串了，因为后面的字串长度只会越来越小
-            if (j == s.length()) {
-                maxLength = Math.max(maxLength, j - i);
-                break;
-            }
-        }
-        return maxLength;
-    }
-
-    /**
-     * 滑动窗口
-     *
-     * @param s
-     * @return
-     */
-    public int solution3(String s) {
-        int i = 0;
-        int j = 0;
-        int maxLength = 0;
-        Set<Character> chars = new HashSet<>();
-        while (i < s.length()) {
-            while (j < s.length()) {
-                // 有重复元素时，将起点字符移除，即换下一个字符作为起点
-                if (chars.contains(s.charAt(j))) {
-                    chars.remove(s.charAt(i));
-                    break;
-                }
-                chars.add(s.charAt(j));
-                j++;
-            }
-            maxLength = Math.max(maxLength, j - i);
-            i++;
+            set.add(s.charAt(right));
+            maxLength = Math.max(maxLength, right - left + 1);
+            right++;
         }
         return maxLength;
     }

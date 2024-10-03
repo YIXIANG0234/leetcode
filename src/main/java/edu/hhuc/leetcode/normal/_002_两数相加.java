@@ -27,66 +27,63 @@ public class _002_两数相加 {
      * @return
      */
     public ListNode solution1(ListNode l1, ListNode l2) {
+        ListNode dummy = new ListNode();
+        ListNode current = dummy;
         int carry = 0;
-        ListNode head = new ListNode(-1);
-        ListNode current = head;
         while (l1 != null && l2 != null) {
-            carry = l1.val + l2.val + carry;
-            current.next = new ListNode(carry % 10);
-            carry = carry / 10;
+            int sum = l1.val + l2.val + carry;
+            carry = sum / 10;
+            current.next = new ListNode(sum % 10);
             current = current.next;
             l1 = l1.next;
             l2 = l2.next;
         }
         while (l1 != null) {
-            carry = l1.val + carry;
-            current.next = new ListNode(carry % 10);
-            carry = carry / 10;
+            int sum = l1.val + carry;
+            carry = sum / 10;
+            current.next = new ListNode(sum % 10);
             current = current.next;
             l1 = l1.next;
         }
         while (l2 != null) {
-            carry = l2.val + carry;
-            current.next = new ListNode(carry % 10);
-            carry = carry / 10;
+            int sum = l2.val + carry;
+            carry = sum / 10;
+            current.next = new ListNode(sum % 10);
             current = current.next;
             l2 = l2.next;
         }
         if (carry != 0) {
             current.next = new ListNode(carry);
         }
-        return head.next;
+        return dummy.next;
     }
 
     /**
-     * 思路和solution1完全一致，但是写法更加简洁
+     * 解法一的简洁实现版本
      *
      * @param l1
      * @param l2
      * @return
      */
     public ListNode solution2(ListNode l1, ListNode l2) {
+        ListNode dummy = new ListNode();
+        ListNode current = dummy;
         int carry = 0;
-        ListNode head = new ListNode(-1);
-        ListNode current = head;
-        while (l1 != null || l2 != null) {
-            int a = l1 == null ? 0 : l1.val;
-            int b = l2 == null ? 0 : l2.val;
-            carry = a + b + carry;
-            current.next = new ListNode(carry % 10);
-            current = current.next;
-            carry = carry / 10;
+        while (l1 != null || l2 != null || carry != 0) {
+            int sum = carry;
             if (l1 != null) {
+                sum = sum + l1.val;
                 l1 = l1.next;
             }
             if (l2 != null) {
+                sum = sum + l2.val;
                 l2 = l2.next;
             }
+            carry = sum / 10;
+            current.next = new ListNode(sum % 10);
+            current = current.next;
         }
-        if (carry != 0) {
-            current.next = new ListNode(carry);
-        }
-        return head.next;
+        return dummy.next;
     }
 
     /**
@@ -104,18 +101,17 @@ public class _002_两数相加 {
         if (l1 == null && l2 == null && carry == 0) {
             return null;
         }
-        int a = l1 == null ? 0 : l1.val;
-        int b = l2 == null ? 0 : l2.val;
-        carry = a + b + carry;
-        ListNode node = new ListNode(carry % 10);
-        carry = carry / 10;
+        int sum = carry;
         if (l1 != null) {
+            sum = sum + l1.val;
             l1 = l1.next;
         }
         if (l2 != null) {
+            sum = sum + l2.val;
             l2 = l2.next;
         }
-        node.next = recursive(l1, l2, carry);
-        return node;
+        ListNode current = new ListNode(sum % 10);
+        current.next = recursive(l1, l2, sum / 10);
+        return current;
     }
 }

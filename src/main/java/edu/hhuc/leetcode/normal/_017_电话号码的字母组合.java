@@ -19,6 +19,7 @@ public class _017_电话号码的字母组合 {
 
     /**
      * 回溯算法
+     *
      * @param digits
      * @return
      */
@@ -39,7 +40,7 @@ public class _017_电话号码的字母组合 {
         }
         String s = phones[digits.charAt(index) - '0' - 2];
         for (int i = 0; i < s.length(); i++) {
-            temporary = temporary.append(s.charAt(i));
+            temporary.append(s.charAt(i));
             backtrack(result, index + 1, digits, temporary, phones);
             temporary.deleteCharAt(index);
         }

@@ -5,6 +5,11 @@ import java.util.LinkedList;
 import java.util.Map;
 
 public class _020_有效的括号 {
+    public static void main(String[] args) {
+        _020_有效的括号 instance = new _020_有效的括号();
+        System.out.println(instance.solution1("[{({[]})}]"));
+    }
+
     /**
      * 使用栈进行匹配
      *
@@ -13,7 +18,7 @@ public class _020_有效的括号 {
      */
     public boolean solution1(String s) {
         LinkedList<Character> stack = new LinkedList<>();
-        Map<Character, Character> map = new HashMap<Character, Character>() {{
+        Map<Character, Character> map = new HashMap<>() {{
             put(')', '(');
             put('}', '{');
             put(']', '[');
@@ -24,7 +29,7 @@ public class _020_有效的括号 {
                 stack.push(ch);
                 continue;
             }
-            if (stack.isEmpty() || map.get(ch) != stack.pop()) {
+            if (stack.isEmpty() || !map.get(ch).equals(stack.pop())) {
                 return false;
             }
         }

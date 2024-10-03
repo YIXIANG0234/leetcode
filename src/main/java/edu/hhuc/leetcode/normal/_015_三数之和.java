@@ -1,9 +1,7 @@
 package edu.hhuc.leetcode.normal;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class _015_三数之和 {
     public static void main(String[] args) {
@@ -13,33 +11,23 @@ public class _015_三数之和 {
     }
 
     /**
-     * 暴力枚举，性能有问题
+     * 暴力枚举，时间复杂度为O(n^3)，同时需要去重，空间复杂度为O(n)
      *
      * @param nums
      * @return
      */
     public List<List<Integer>> solution1(int[] nums) {
         List<List<Integer>> result = new ArrayList<>();
-        for (int i = 0; i < nums.length - 2; i++) {
-            int a = nums[i];
-            for (int j = i + 1; j < nums.length - 1; j++) {
-                int b = nums[j];
+        Set<String> exists = new HashSet<>();
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = i + 1; j < nums.length; j++) {
                 for (int k = j + 1; k < nums.length; k++) {
-                    int c = nums[k];
-                    if (a + b + c == 0) {
-                        List list = Arrays.asList(a, b, c);
-                        Collections.sort(list);
-                        boolean[] flag = {false};
-                        result.stream().forEach(x -> {
-                            if (x.equals(list)) {
-                                flag[0] = true;
-                                return;
-                            }
-                        });
-                        if (!flag[0]) {
-                            List item = Arrays.asList(a, b, c);
-                            Collections.sort(item);
-                            result.add(item);
+                    if (nums[i] + nums[j] + nums[k] == 0) {
+                        // 去除重复的元组
+                        List<Integer> list = Arrays.asList(nums[i], nums[j], nums[k]);
+                        String combination = list.stream().sorted().map(String::valueOf).collect(Collectors.joining(","));
+                        if (exists.add(combination)) {
+                            result.add(list);
                         }
                     }
                 }
@@ -49,16 +37,47 @@ public class _015_三数之和 {
     }
 
     /**
-     * 先排序，然后使用两个指针查找
+     * 对solution1进行的优化
+     *
      * @param nums
      * @return
      */
     public List<List<Integer>> solution2(int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
+        Arrays.sort(nums);
+        for (int i = 0; i < nums.length; i++) {
+            if (i != 0 && nums[i] == nums[i - 1]) {
+                continue;
+            }
+            for (int j = i + 1; j < nums.length; j++) {
+                if (j != i + 1 && nums[j] == nums[j - 1]) {
+                    continue;
+                }
+                for (int k = j + 1; k < nums.length; k++) {
+                    if (k != j + 1 && nums[k] == nums[k - 1]) {
+                        continue;
+                    }
+                    if (nums[i] + nums[j] + nums[k] == 0) {
+                        result.add(Arrays.asList(nums[i], nums[j], nums[k]));
+                    }
+                }
+            }
+        }
+        return result;
+    }
+
+    /**
+     * 先排序，然后使用两个指针查找
+     *
+     * @param nums
+     * @return
+     */
+    public List<List<Integer>> solution3(int[] nums) {
         Arrays.sort(nums);
         List<List<Integer>> result = new ArrayList<>();
-        for (int i = 0; i < nums.length - 2; i++) {
+        for (int i = 0; i < nums.length; i++) {
             // 去除重复的元组
-            if (i > 0 && nums[i-1] == nums[i]) {
+            if (i != 0 && nums[i - 1] == nums[i]) {
                 continue;
             }
             int left = i + 1;

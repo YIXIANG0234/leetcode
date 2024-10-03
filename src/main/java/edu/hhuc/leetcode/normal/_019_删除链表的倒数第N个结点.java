@@ -5,6 +5,14 @@ import edu.hhuc.leetcode.entity.ListNode;
 import java.util.Stack;
 
 public class _019_删除链表的倒数第N个结点 {
+    public static void main(String[] args) {
+        _019_删除链表的倒数第N个结点 instance = new _019_删除链表的倒数第N个结点();
+        ListNode head = ListNode.randomList(10);
+        ListNode.formatList(head);
+        ListNode result = instance.solution1(head, 3);
+        ListNode.formatList(result);
+    }
+
     /**
      * 删除倒数第n个节点，可以转换为删除正数第m个节点
      *
@@ -54,7 +62,7 @@ public class _019_删除链表的倒数第N个结点 {
             n--;
         }
         // 如果栈空，则表示删除第一个元素
-        if (stack.isEmpty()){
+        if (stack.isEmpty()) {
             return head.next;
         }
         // 删除倒数第n个元素

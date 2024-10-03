@@ -3,7 +3,7 @@ package edu.hhuc.leetcode.normal;
 public class _005_最长回文子串 {
     public static void main(String[] args) {
         _005_最长回文子串 instance = new _005_最长回文子串();
-        System.out.println(instance.solution3("51233214"));
+        System.out.println(instance.longestPalindrome("cbbd"));
     }
 
     /**
@@ -47,6 +47,7 @@ public class _005_最长回文子串 {
      * 假设dp[i][j]表示字符i到j的字串是回文串
      * 则dp[i-1][j+1]是回文串的条件是，s[i-1] == s[j+1] 且 dp[i][j]是回文串
      * 时间复杂度和空间复杂度都是O(n^2)
+     *
      * @param s
      * @return
      */
@@ -58,8 +59,9 @@ public class _005_最长回文子串 {
             for (int left = 0; left <= right; left++) {
                 if (s.charAt(right) == s.charAt(left) && (right - left <= 1 || dp[left + 1][right - 1] == 1)) {
                     dp[left][right] = 1;
-                    String temp = s.substring(left, right + 1);
-                    maxString = maxString.length() > temp.length() ? maxString : temp;
+                    if ((right - left + 1) > maxString.length()) {
+                        maxString = s.substring(left, right + 1);
+                    }
                 }
             }
         }
@@ -67,7 +69,7 @@ public class _005_最长回文子串 {
     }
 
     private boolean isPalindromic(String s, int start, int end) {
-        while (start < end) {
+        while (start <= end) {
             if (s.charAt(start) != s.charAt(end)) {
                 return false;
             }
@@ -83,5 +85,21 @@ public class _005_最长回文子串 {
             right++;
         }
         return s.substring(left + 1, right);
+    }
+
+    public String longestPalindrome(String s) {
+        String maxString = "";
+        int len = s.length();
+        boolean[][] dp = new boolean[len][len];
+        for (int right = 0; right < s.length(); right++) {
+            for (int left = 0; left <= right; left++) {
+                if (s.charAt(left) == s.charAt(right) && (right - left <= 1 || dp[left + 1][right - 1])) {
+                    dp[left][right] = true;
+                    String temp = s.substring(left, right + 1);
+                    maxString = maxString.length() > temp.length() ? maxString : temp;
+                }
+            }
+        }
+        return maxString;
     }
 }

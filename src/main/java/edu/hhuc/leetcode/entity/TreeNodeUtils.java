@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 public class TreeNodeUtils {
     public static void main(String[] args) {
         // TreeNode root = buildTree(Lists.newArrayList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15));
-        TreeNode root = buildTree(Lists.newArrayList(5,4,3,3,2,2,1,2,1));
+        TreeNode root = buildTree(Lists.newArrayList(5, 4, 3, 3, 2, 2, 1, 2, 1));
         // TreeNode root = randomTree(10);
         prettyPrintTree(root);
     }
