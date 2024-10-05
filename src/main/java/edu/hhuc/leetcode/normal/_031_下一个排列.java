@@ -17,7 +17,7 @@ public class _031_下一个排列 {
         }
         if (i >= 0) {
             int j = nums.length - 1;
-            while (j >= 0 && nums[i] >= nums[j]) {
+            while (nums[i] >= nums[j]) {
                 j--;
             }
             swap(nums, i, j);

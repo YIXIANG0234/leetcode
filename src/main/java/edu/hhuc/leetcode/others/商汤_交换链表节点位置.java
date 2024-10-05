@@ -16,7 +16,7 @@ public class 商汤_交换链表节点位置 {
     public static void main(String[] args) {
         ListNode head = ListNode.buildLinkedList(1, 2, 3, 4, 5, 6);
         商汤_交换链表节点位置 instance = new 商汤_交换链表节点位置();
-        ListNode.formatList(instance.solution(head, 1, 4));
+        ListNode.beautifulFormat(instance.solution(head, 1, 4));
     }
 
     /**

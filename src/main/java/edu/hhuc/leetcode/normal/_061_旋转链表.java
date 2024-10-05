@@ -17,7 +17,7 @@ public class _061_旋转链表 {
     public static void main(String[] args) {
         ListNode head = ListNode.buildLinkedList(1, 2, 3, 4, 5);
         _061_旋转链表 instance = new _061_旋转链表();
-        ListNode.formatList(instance.solution2(head, 3));
+        ListNode.beautifulFormat(instance.solution2(head, 3));
     }
 
     /**

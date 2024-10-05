@@ -8,9 +8,9 @@ public class _019_删除链表的倒数第N个结点 {
     public static void main(String[] args) {
         _019_删除链表的倒数第N个结点 instance = new _019_删除链表的倒数第N个结点();
         ListNode head = ListNode.randomList(10);
-        ListNode.formatList(head);
+        ListNode.beautifulFormat(head);
         ListNode result = instance.solution1(head, 3);
-        ListNode.formatList(result);
+        ListNode.beautifulFormat(result);
     }
 
     /**

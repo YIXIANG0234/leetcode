@@ -51,7 +51,7 @@ public class ListNode {
         System.out.println(result);
     }
 
-    public static void formatList(ListNode head) {
+    public static void beautifulFormat(ListNode head) {
         StringBuilder sb = new StringBuilder();
         while (Objects.nonNull(head)) {
             sb.append(head.val);

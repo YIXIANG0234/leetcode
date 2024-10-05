@@ -2,6 +2,8 @@ package edu.hhuc.leetcode.hard;
 
 import edu.hhuc.leetcode.entity.ListNode;
 
+import java.util.PriorityQueue;
+
 /**
  * @program: leetcode
  * @ClassName _023_合并K个升序链表
@@ -15,11 +17,12 @@ public class _023_合并K个升序链表 {
         _023_合并K个升序链表 instance = new _023_合并K个升序链表();
         ListNode node1 = ListNode.buildLinkedList(1, 4, 5);
         ListNode node2 = ListNode.buildLinkedList(1, 3, 4);
-        ListNode node3 = ListNode.buildLinkedList(2, 6);
+        ListNode node3 = ListNode.buildLinkedList(2, 6, 7);
         ListNode[] lists = {node1, node2, node3};
-        ListNode result = instance.solution2(lists);
+        ListNode result = instance.solution4(lists);
         ListNode.printLinkedList(result);
     }
+
 
     /**
      * 暴力破解，每次在n个有序链表中选出最小的节点加入结果集，注意对已遍历结束的链表的处理
@@ -28,27 +31,20 @@ public class _023_合并K个升序链表 {
      * @return
      */
     public ListNode solution1(ListNode[] lists) {
-        ListNode dummy = new ListNode(-1);
-        ListNode processNode = dummy;
+        ListNode dummy = new ListNode();
+        ListNode current = dummy;
         while (true) {
             int minIndex = -1;
             for (int i = 0; i < lists.length; i++) {
-                if (minIndex == -1) {
-                    minIndex = lists[i] == null ? -1 : i;
-                    continue;
-                }
-                ListNode minNode = lists[minIndex];
-                ListNode current = lists[i];
-                if (current != null && current.val < minNode.val) {
+                if (lists[i] != null && (minIndex == -1 || lists[i].val <= lists[minIndex].val)) {
                     minIndex = i;
                 }
             }
-            // 表示所有的有序链表都已经处理完毕
             if (minIndex == -1) {
                 break;
             }
-            processNode.next = lists[minIndex];
-            processNode = processNode.next;
+            current.next = lists[minIndex];
+            current = current.next;
             lists[minIndex] = lists[minIndex].next;
         }
         return dummy.next;
@@ -57,6 +53,7 @@ public class _023_合并K个升序链表 {
     /**
      * 顺序合并，先合并第一个和第二个链表，再将第一个和第二个链表的合并结果和第三个进行合并
      * 两两合并时使用两个有序链表的解法
+     *
      * @param lists
      * @return
      */
@@ -69,12 +66,63 @@ public class _023_合并K个升序链表 {
     }
 
     /**
+     * 优先队列
+     *
+     * @param lists
+     * @return
+     */
+    public ListNode solution3(ListNode[] lists) {
+        PriorityQueue<ListNode> queue = new PriorityQueue<>((node1, node2) -> node1.val - node2.val);
+        for (int i = 0; i < lists.length; i++) {
+            if (lists[i] != null) {
+                queue.offer(lists[i]);
+            }
+        }
+        ListNode dummy = new ListNode();
+        ListNode current = dummy;
+        while (!queue.isEmpty()) {
+            ListNode top = queue.poll();
+            current.next = top;
+            current = current.next;
+            top = top.next;
+            if (top != null) {
+                queue.offer(top);
+            }
+        }
+        return dummy.next;
+    }
+
+    /**
+     * 分治法
+     *
+     * @param lists
+     * @return
+     */
+    public ListNode solution4(ListNode[] lists) {
+        if (lists.length == 0) {
+            return null;
+        }
+        return divide(lists, 0, lists.length - 1);
+    }
+
+    private ListNode divide(ListNode[] lists, int left, int right) {
+        if (left == right) {
+            return lists[left];
+        }
+        int mid = (left + right) / 2;
+        ListNode node1 = divide(lists, left, mid);
+        ListNode node2 = divide(lists, mid + 1, right);
+        return mergeList(node1, node2);
+    }
+
+    /**
      * 合并两个有序链表
+     *
      * @param a
      * @param b
      * @return
      */
-    public ListNode mergeList(ListNode a, ListNode b) {
+    private ListNode mergeList(ListNode a, ListNode b) {
         ListNode dummy = new ListNode(-1);
         ListNode tail = dummy;
         while (a != null && b != null) {

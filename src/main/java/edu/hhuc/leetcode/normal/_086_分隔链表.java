@@ -14,7 +14,7 @@ public class _086_分隔链表 {
     public static void main(String[] args) {
         _086_分隔链表 instance = new _086_分隔链表();
         ListNode head = ListNode.buildLinkedList(1, 4, 3, 2, 5, 2);
-        ListNode.formatList(instance.solution1(head, 3));
+        ListNode.beautifulFormat(instance.solution1(head, 3));
     }
 
     public ListNode solution1(ListNode head, int x) {

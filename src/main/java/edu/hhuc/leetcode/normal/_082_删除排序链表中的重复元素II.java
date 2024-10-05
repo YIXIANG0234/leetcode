@@ -14,7 +14,7 @@ public class _082_删除排序链表中的重复元素II {
     public static void main(String[] args) {
         _082_删除排序链表中的重复元素II instance = new _082_删除排序链表中的重复元素II();
         ListNode head = ListNode.buildLinkedList(1, 2, 3, 3, 4, 4, 5);
-        ListNode.formatList(instance.solution1(head));
+        ListNode.beautifulFormat(instance.solution1(head));
     }
 
     public ListNode solution1(ListNode head) {

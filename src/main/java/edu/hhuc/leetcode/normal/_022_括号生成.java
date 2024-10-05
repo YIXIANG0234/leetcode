@@ -6,8 +6,7 @@ import java.util.List;
 public class _022_括号生成 {
     public static void main(String[] args) {
         _022_括号生成 instance = new _022_括号生成();
-        char[] chars = ")(()".toCharArray();
-        System.out.println(instance.valid(chars));
+        System.out.println(instance.solution1(3));
     }
 
     public List<String> solution1(int n) {
@@ -18,6 +17,7 @@ public class _022_括号生成 {
 
     /**
      * 递归生成所有可能的括号组合，然后将有效组合加入结果集
+     *
      * @param current
      * @param pos
      * @param result
@@ -38,6 +38,7 @@ public class _022_括号生成 {
 
     /**
      * 校验括号有效性
+     *
      * @param current
      * @return
      */
