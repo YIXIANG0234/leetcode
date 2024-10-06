@@ -14,9 +14,16 @@ import java.util.List;
 public class _039_组合总和 {
     public static void main(String[] args) {
         _039_组合总和 instance = new _039_组合总和();
-        System.out.println(instance.solution1(new int[]{2, 3, 5, 8}, 8));
+        System.out.println(instance.solution1(new int[]{8, 5, 3, 2}, 8));
     }
 
+    /**
+     * 回溯的写法
+     *
+     * @param candidates
+     * @param target
+     * @return
+     */
     public List<List<Integer>> solution1(int[] candidates, int target) {
         List<List<Integer>> combinations = new ArrayList<>();
         List<Integer> combination = new ArrayList<>();
@@ -38,5 +45,33 @@ public class _039_组合总和 {
             combination.remove(combination.size() - 1);
         }
         backTrace(combinations, combination, candidates, target, index + 1);
+    }
+
+
+    /**
+     * 回溯的第二种写法
+     *
+     * @param candidates
+     * @param target
+     * @return
+     */
+    public List<List<Integer>> solution2(int[] candidates, int target) {
+        List<List<Integer>> result = new ArrayList<>();
+        backTrace2(candidates, target, new ArrayList<>(), result, 0);
+        return result;
+    }
+
+    private void backTrace2(int[] candidates, int target, List<Integer> list, List<List<Integer>> result, int index) {
+        if (target == 0) {
+            result.add(new ArrayList<>(list));
+            return;
+        }
+        for (int i = index; i < candidates.length; i++) {
+            if (candidates[i] <= target) {
+                list.add(candidates[i]);
+                backTrace2(candidates, target - candidates[i], list, result, i);
+                list.remove(list.size() - 1);
+            }
+        }
     }
 }

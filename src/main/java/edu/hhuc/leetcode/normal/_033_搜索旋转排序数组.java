@@ -72,9 +72,9 @@ public class _033_搜索旋转排序数组 {
                 return mid;
             }
             // 左边部分有序
-            if (nums[mid] >= nums[0]) {
+            if (nums[mid] >= nums[left]) {
                 // 在左边找
-                if (nums[0] <= target && target < nums[mid]) {
+                if (nums[left] <= target && target < nums[mid]) {
                     right = mid - 1;
                 } else {
                     left = mid + 1;
