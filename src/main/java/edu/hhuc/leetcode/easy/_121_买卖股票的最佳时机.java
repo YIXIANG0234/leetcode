@@ -22,13 +22,8 @@ public class _121_买卖股票的最佳时机 {
     public int solution1(int[] prices) {
         int maxProfit = 0;
         for (int i = 0; i < prices.length - 1; i++) {
-            int buy = prices[i];
             for (int j = i + 1; j < prices.length; j++) {
-                int sell = prices[j];
-                int profit = sell - buy;
-                if (profit > maxProfit) {
-                    maxProfit = profit;
-                }
+                maxProfit = Math.max(maxProfit, prices[j] - prices[i]);
             }
         }
         return maxProfit;
@@ -55,6 +50,7 @@ public class _121_买卖股票的最佳时机 {
 
     /**
      * 单调递增栈
+     *
      * @param prices
      * @return
      */
@@ -75,4 +71,6 @@ public class _121_买卖股票的最佳时机 {
         }
         return maxProfit;
     }
+
+
 }

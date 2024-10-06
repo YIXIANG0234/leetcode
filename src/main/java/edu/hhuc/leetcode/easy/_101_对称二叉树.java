@@ -1,81 +1,43 @@
 package edu.hhuc.leetcode.easy;
 
 import edu.hhuc.leetcode.entity.TreeNode;
+import edu.hhuc.leetcode.entity.TreeNodeUtils;
 
 import java.util.LinkedList;
 import java.util.Queue;
 
 public class _101_对称二叉树 {
     public static void main(String[] args) {
-        TreeNode node3_1 = new TreeNode(3);
-        TreeNode node3_2 = new TreeNode(3);
-        TreeNode node4_1 = new TreeNode(4);
-        TreeNode node4_2 = new TreeNode(4);
-        TreeNode node2_1 = new TreeNode(2, node3_1, node4_1);
-        TreeNode node2_2 = new TreeNode(2, node4_2, node3_2);
-        TreeNode node1 = new TreeNode(1, node2_1, node2_2);
+        TreeNode root = TreeNodeUtils.buildTree(new int[]{1, 2, 2, 3, 4, 4, 3});
+        TreeNodeUtils.prettyPrintTree(root);
         _101_对称二叉树 instance = new _101_对称二叉树();
-        System.out.println(instance.solution2(node1));
-
+        System.out.println(instance.solution1(root));
     }
+
     /**
      * 深度优先遍历：递归解法
+     *
      * @param root
      * @return
      */
     public boolean solution1(TreeNode root) {
-       return isSymmetric(root.left, root.right);
+        return isSymmetric(root.left, root.right);
     }
 
     /**
-     * 广度优先遍历：迭代解法
+     * 广度优先遍历，将二叉树入队两次，分别比较左右子树是否对称
+     *
      * @param root
      * @return
      */
     public boolean solution2(TreeNode root) {
-        LinkedList<TreeNode> queue = new LinkedList<>();
-        queue.addLast(root);
-        while (!queue.isEmpty()) {
-            int head = 0;
-            int tail = queue.size() - 1;
-            while (head <= tail) {
-                TreeNode headNode = queue.get(head);
-                TreeNode tailNode = queue.get(tail);
-                if (headNode == null ^ tailNode == null) {
-                    return false;
-                }
-                if ((headNode == null && tailNode == null ) || (headNode.val == tailNode.val)) {
-                    head++;
-                    tail--;
-                    continue;
-                }
-                return false;
-            }
-            int size = queue.size();
-            for (int i=0;i< size;i++) {
-                TreeNode node = queue.removeFirst();
-                if (node != null) {
-                    queue.addLast(node.left);
-                    queue.addLast(node.right);
-                }
-            }
-        }
-        return true;
-    }
-
-    /**
-     * 广度优先遍历：写法比solution2要简洁
-     * @param root
-     * @return
-     */
-    public boolean solution3(TreeNode root) {
         Queue<TreeNode> queue = new LinkedList<>();
         queue.offer(root);
         queue.offer(root);
 
         while (!queue.isEmpty()) {
             TreeNode node1 = queue.poll();
-            TreeNode node2= queue.poll();
+            TreeNode node2 = queue.poll();
             if (node1 == null && node2 == null) {
                 continue;
             }

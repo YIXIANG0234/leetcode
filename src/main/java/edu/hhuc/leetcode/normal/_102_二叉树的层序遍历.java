@@ -9,12 +9,13 @@ public class _102_二叉树的层序遍历 {
 
     public static void main(String[] args) {
         _102_二叉树的层序遍历 instance = new _102_二叉树的层序遍历();
-        TreeNode root = TreeNodeUtils.buildTree(Arrays.asList(3,9,20,null,null,15,7));
+        TreeNode root = TreeNodeUtils.buildTree(Arrays.asList(3, 9, 20, null, null, 15, 7));
         System.out.println(instance.solution2(root));
     }
 
     /**
      * 广度优先搜索实现层序遍历
+     *
      * @param root
      * @return
      */
@@ -29,7 +30,7 @@ public class _102_二叉树的层序遍历 {
             // 当前层节点的数量
             int levelSize = queue.size();
             List<Integer> list = new ArrayList<>();
-            for(int i=0;i<levelSize;i++) {
+            for (int i = 0; i < levelSize; i++) {
                 TreeNode node = queue.poll();
                 list.add(node.val);
                 if (node.left != null) {
@@ -46,28 +47,25 @@ public class _102_二叉树的层序遍历 {
 
     /**
      * 深度优先搜索实现层序遍历
+     *
      * @param root
      * @return
      */
     public List<List<Integer>> solution2(TreeNode root) {
-        if (root == null) {
-            return new ArrayList<>();
-        }
         List<List<Integer>> result = new ArrayList<>();
-        dfs(root, 0, result);
+        dfs(root, 1, result);
         return result;
     }
 
     public void dfs(TreeNode root, int level, List<List<Integer>> result) {
-        if (result.size() < level+1) {
+        if (root == null) {
+            return;
+        }
+        if (result.size() < level) {
             result.add(new ArrayList<>());
         }
-        result.get(level).add(root.val);
-        if (root.left != null) {
-            dfs(root.left, level+1, result);
-        }
-        if (root.right != null) {
-            dfs(root.right, level+1, result);
-        }
+        result.get(level - 1).add(root.val);
+        dfs(root.left, level + 1, result);
+        dfs(root.right, level + 1, result);
     }
 }
