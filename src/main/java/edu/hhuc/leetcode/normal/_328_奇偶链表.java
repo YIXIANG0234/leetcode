@@ -1,13 +1,14 @@
 package edu.hhuc.leetcode.normal;
 
 import edu.hhuc.leetcode.entity.ListNode;
+import edu.hhuc.leetcode.entity.ListNodeUtils;
 
 public class _328_奇偶链表 {
 
     public static void main(String[] args) {
         _328_奇偶链表 instance = new _328_奇偶链表();
-        ListNode head = ListNode.buildLinkedList(1, 2, 3, 4, 5);
-        ListNode.printLinkedList(instance.solution1(head));
+        ListNode head = ListNodeUtils.buildLinkedList(1, 2, 3, 4, 5);
+        ListNodeUtils.printLinkedList(instance.solution1(head));
     }
 
     public ListNode solution1(ListNode head) {

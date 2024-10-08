@@ -1,13 +1,14 @@
 package edu.hhuc.leetcode.normal;
 
 import edu.hhuc.leetcode.entity.ListNode;
+import edu.hhuc.leetcode.entity.ListNodeUtils;
 
 import java.util.Arrays;
 
 public class _725_分隔链表 {
     public static void main(String[] args) {
         _725_分隔链表 instance = new _725_分隔链表();
-        ListNode head = ListNode.buildLinkedList(1, 2, 3);
+        ListNode head = ListNodeUtils.buildLinkedList(1, 2, 3);
         System.out.println(Arrays.toString(instance.solution1(head, 5)));
 
     }

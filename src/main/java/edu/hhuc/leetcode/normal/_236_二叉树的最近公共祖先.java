@@ -11,7 +11,7 @@ public class _236_二叉树的最近公共祖先 {
     private Set<TreeNode> visited = new HashSet<>();
 
     public static void main(String[] args) {
-        TreeNode root = TreeNodeUtils.buildTree(Arrays.asList(3,5,1,6,2,0,8,null,null,7,4));
+        TreeNode root = TreeNodeUtils.buildTree(Arrays.asList(3, 5, 1, 6, 2, 0, 8, null, null, 7, 4));
         TreeNode p = null;
         TreeNode q = null;
         _236_二叉树的最近公共祖先 instance = new _236_二叉树的最近公共祖先();
@@ -21,6 +21,7 @@ public class _236_二叉树的最近公共祖先 {
 
     /**
      * 递归查找
+     *
      * @param root
      * @param p
      * @param q
@@ -35,11 +36,12 @@ public class _236_二叉树的最近公共祖先 {
         if (left != null && right != null) {
             return root;
         }
-        return left == null ? right : left;
+        return left != null ? left : right;
     }
 
     /**
      * 先记录所有节点 父节点，然后分别向上查p，q的父节点
+     *
      * @param root
      * @param p
      * @param q
@@ -49,7 +51,7 @@ public class _236_二叉树的最近公共祖先 {
         dfs(root);
         while (p != null) {
             visited.add(p);
-           p = parentMap.get(p);
+            p = parentMap.get(p);
         }
 
         while (q != null) {

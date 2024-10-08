@@ -8,7 +8,7 @@ public class _169_多数元素 {
 
     public static void main(String[] args) {
         _169_多数元素 instance = new _169_多数元素();
-        System.out.println(instance.solution3(new int[]{7,3,3,5,3,4,3}));
+        System.out.println(instance.solution3(new int[]{7, 3, 3, 5, 3, 4, 3}));
     }
 
     /**
@@ -43,11 +43,12 @@ public class _169_多数元素 {
      */
     public int solution2(int[] nums) {
         Arrays.sort(nums);
-        return nums[(int) Math.ceil(nums.length / 2)];
+        return nums[nums.length / 2];
     }
 
     /**
      * 投票法
+     *
      * @param nums
      * @return
      */
@@ -62,5 +63,4 @@ public class _169_多数元素 {
         }
         return candidate;
     }
-
 }

@@ -52,7 +52,7 @@ public class Heap {
             data[parent] = data[currentIndex];
             data[currentIndex] = temp;
             currentIndex = parent;
-            parent = (currentIndex - 1) / 2;
+            parent = (parent - 1) / 2;
         }
         index++;
     }

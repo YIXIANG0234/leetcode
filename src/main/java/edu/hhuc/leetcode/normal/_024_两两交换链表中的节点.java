@@ -1,12 +1,13 @@
 package edu.hhuc.leetcode.normal;
 
 import edu.hhuc.leetcode.entity.ListNode;
+import edu.hhuc.leetcode.entity.ListNodeUtils;
 
 public class _024_两两交换链表中的节点 {
     public static void main(String[] args) {
-        ListNode head = ListNode.buildLinkedList(1, 2, 3, 4, 5, 9, 11, 8);
+        ListNode head = ListNodeUtils.buildLinkedList(1, 2, 3, 4, 5, 9, 11, 8);
         _024_两两交换链表中的节点 instance = new _024_两两交换链表中的节点();
-        ListNode.printLinkedList(instance.solution4(head));
+        ListNodeUtils.printLinkedList(instance.solution4(head));
     }
 
     /**

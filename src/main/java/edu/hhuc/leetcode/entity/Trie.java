@@ -4,22 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * @author 14852
+ */
 public class Trie {
-    public static void main(String[] args) {
-        Trie trie = new Trie();
-        trie.insert("catch");
-        trie.insert("cat");
-        trie.insert("catabolite");
-        trie.insert("cate");
-        trie.insert("dog");
-        trie.insert("hike");
-        trie.insert("hug");
-        trie.insert("done");
-        trie.insert("hi");
-        trie.insert("hello");
-        System.out.println(trie.match("hi"));
-    }
-
     private Trie[] children;
     boolean isEnd;
 
@@ -45,7 +33,7 @@ public class Trie {
         return Objects.nonNull(node) && node.isEnd;
     }
 
-    public boolean startWith(String prefix) {
+    public boolean startsWith(String prefix) {
         Trie node = innerSearch(prefix);
         return Objects.nonNull(node);
     }

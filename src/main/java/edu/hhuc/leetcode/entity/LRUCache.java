@@ -13,68 +13,83 @@ import java.util.Map;
 public class LRUCache {
     private int capacity;
     private int size;
-    private Map<Integer, ListNode> cache;
-    private ListNode head;
-    private ListNode tail;
+    private Map<Integer, DoubleLinkedNode> cache;
+    private DoubleLinkedNode head;
+    private DoubleLinkedNode tail;
 
     public LRUCache(int capacity) {
         this.capacity = capacity;
-        this.cache = new HashMap<>();
-    }
+        this.cache = new HashMap<>(capacity);
+        this.head = new DoubleLinkedNode(-1, -1);
+        this.tail = new DoubleLinkedNode(-1, -1);
 
-    public void put(int key, int value) {
-        ListNode node = cache.get(key);
-        if (node != null) {
-            node.val = value;
-            moveToHead(node);
-            return;
-        }
-        node = new ListNode(value);
-        cache.put(key, node);
-        if (head == null) {
-            head = node;
-            tail = node;
-        } else {
-            node.next = head;
-            head = node;
-        }
-        if (size == capacity) {
-            ListNode removed = removeTail();
-            cache.remove(removed.val);
-        } else {
-            size++;
-        }
-//        ListNode.printLinkedList(head);
+        head.next = tail;
+        tail.prev = head;
     }
 
     public int get(int key) {
-        ListNode node = cache.get(key);
+        DoubleLinkedNode node = cache.get(key);
         if (node == null) {
             return -1;
         }
         moveToHead(node);
-        return node.val;
+        return node.value;
     }
 
-    private void moveToHead(ListNode node) {
-        ListNode current = head;
-        while (current.next != node) {
-            current = current.next;
+    public void put(int key, int value) {
+        DoubleLinkedNode node = this.cache.get(key);
+        if (node != null) {
+            node.value = value;
+            moveToHead(node);
+            return;
         }
-        current.next = node.next;
-        node.next = head;
-        head = node;
-//        ListNode.printLinkedList(head);
+        DoubleLinkedNode newNode = new DoubleLinkedNode(key, value);
+        addToHead(newNode);
+        cache.put(key, newNode);
+        size++;
+        if (size > this.capacity) {
+            DoubleLinkedNode tailNode = removeTail();
+            this.cache.remove(tailNode.key);
+            size--;
+        }
     }
 
-    private ListNode removeTail() {
-        ListNode current = head;
-        while (current.next != tail) {
-            current = current.next;
-        }
-        ListNode node = tail;
-        current.next = null;
-        tail = current;
+
+    private DoubleLinkedNode removeTail() {
+        DoubleLinkedNode node = tail.prev;
+        node.prev.next = tail;
+        tail.prev = node.prev;
+
+        node.prev = null;
+        node.next = null;
         return node;
+    }
+
+    private void addToHead(DoubleLinkedNode node) {
+        node.prev = head;
+        node.next = head.next;
+        head.next.prev = node;
+        head.next = node;
+    }
+
+    private void moveToHead(DoubleLinkedNode node) {
+        node.prev.next = node.next;
+        node.next.prev = node.prev;
+        node.next = null;
+        node.prev = null;
+        addToHead(node);
+    }
+
+
+    private class DoubleLinkedNode {
+        private int key;
+        private int value;
+        private DoubleLinkedNode prev;
+        private DoubleLinkedNode next;
+
+        public DoubleLinkedNode(int key, int value) {
+            this.key = key;
+            this.value = value;
+        }
     }
 }

@@ -3,7 +3,7 @@ package edu.hhuc.leetcode.normal;
 public class _279_完全平方数 {
     public static void main(String[] args) {
         _279_完全平方数 instance = new _279_完全平方数();
-        System.out.println(instance.solution1(10));
+        System.out.println(instance.solution1(12));
     }
 
     public int solution1(int n) {

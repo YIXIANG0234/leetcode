@@ -1,15 +1,16 @@
 package edu.hhuc.leetcode.normal;
 
 import edu.hhuc.leetcode.entity.ListNode;
+import edu.hhuc.leetcode.entity.ListNodeUtils;
 
 import java.util.Stack;
 
 public class _445_两数相加II {
     public static void main(String[] args) {
         _445_两数相加II instance = new _445_两数相加II();
-        ListNode l1 = ListNode.buildLinkedList(7, 2, 4, 3);
-        ListNode l2 = ListNode.buildLinkedList(5, 6, 4);
-        ListNode.printLinkedList(instance.solution1(l1, l2));
+        ListNode l1 = ListNodeUtils.buildLinkedList(7, 2, 4, 3);
+        ListNode l2 = ListNodeUtils.buildLinkedList(5, 6, 4);
+        ListNodeUtils.printLinkedList(instance.solution1(l1, l2));
     }
 
     /**
