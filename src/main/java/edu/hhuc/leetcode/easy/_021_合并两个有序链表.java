@@ -1,14 +1,15 @@
 package edu.hhuc.leetcode.easy;
 
 import edu.hhuc.leetcode.entity.ListNode;
+import edu.hhuc.leetcode.entity.ListNodeUtils;
 
 public class _021_合并两个有序链表 {
     public static void main(String[] args) {
         _021_合并两个有序链表 instance = new _021_合并两个有序链表();
-        ListNode list1 = ListNode.buildLinkedList(1, 2, 4);
-        ListNode list2 = ListNode.buildLinkedList(1, 3, 4);
+        ListNode list1 = ListNodeUtils.buildLinkedList(1, 2, 4);
+        ListNode list2 = ListNodeUtils.buildLinkedList(1, 3, 4);
         ListNode result = instance.solution1(list1, list2);
-        ListNode.beautifulFormat(result);
+        ListNodeUtils.beautifulFormat(result);
     }
 
     /**

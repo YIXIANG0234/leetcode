@@ -1,6 +1,7 @@
 package edu.hhuc.leetcode.normal;
 
 import edu.hhuc.leetcode.entity.ListNode;
+import edu.hhuc.leetcode.entity.ListNodeUtils;
 
 /**
  * @program: leetcode
@@ -12,11 +13,11 @@ import edu.hhuc.leetcode.entity.ListNode;
  */
 public class _002_两数相加 {
     public static void main(String[] args) {
-        ListNode node1 = ListNode.buildLinkedList(1, 4, 8, 9);
-        ListNode node2 = ListNode.buildLinkedList(5, 7, 3, 9, 0, 1, 7);
+        ListNode node1 = ListNodeUtils.buildLinkedList(1, 4, 8, 9);
+        ListNode node2 = ListNodeUtils.buildLinkedList(5, 7, 3, 9, 0, 1, 7);
         _002_两数相加 instance = new _002_两数相加();
         ListNode result = instance.solution3(node1, node2);
-        ListNode.printLinkedList(result);
+        ListNodeUtils.printLinkedList(result);
     }
 
     /**

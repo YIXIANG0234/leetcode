@@ -1,6 +1,7 @@
 package edu.hhuc.leetcode.others;
 
 import edu.hhuc.leetcode.entity.ListNode;
+import edu.hhuc.leetcode.entity.ListNodeUtils;
 
 import java.util.Objects;
 
@@ -14,9 +15,9 @@ import java.util.Objects;
  */
 public class 商汤_交换链表节点位置 {
     public static void main(String[] args) {
-        ListNode head = ListNode.buildLinkedList(1, 2, 3, 4, 5, 6);
+        ListNode head = ListNodeUtils.buildLinkedList(1, 2, 3, 4, 5, 6);
         商汤_交换链表节点位置 instance = new 商汤_交换链表节点位置();
-        ListNode.beautifulFormat(instance.solution(head, 1, 4));
+        ListNodeUtils.beautifulFormat(instance.solution(head, 1, 4));
     }
 
     /**

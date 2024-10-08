@@ -1,6 +1,7 @@
 package edu.hhuc.leetcode.剑指Offer;
 
 import edu.hhuc.leetcode.entity.ListNode;
+import edu.hhuc.leetcode.entity.ListNodeUtils;
 
 /**
  * @program: leetcode
@@ -13,8 +14,8 @@ import edu.hhuc.leetcode.entity.ListNode;
 public class _024_反转链表 {
     public static void main(String[] args) {
         _024_反转链表 instance = new _024_反转链表();
-        ListNode head = ListNode.buildLinkedList(1, 2, 3, 4, 5);
-        ListNode.printLinkedList(instance.reverseList2(head));
+        ListNode head = ListNodeUtils.buildLinkedList(1, 2, 3, 4, 5);
+        ListNodeUtils.printLinkedList(instance.reverseList2(head));
     }
 
     public ListNode reverseList1(ListNode head) {

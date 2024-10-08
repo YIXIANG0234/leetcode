@@ -1,16 +1,17 @@
 package edu.hhuc.leetcode.normal;
 
 import edu.hhuc.leetcode.entity.ListNode;
+import edu.hhuc.leetcode.entity.ListNodeUtils;
 
 import java.util.Stack;
 
 public class _019_删除链表的倒数第N个结点 {
     public static void main(String[] args) {
         _019_删除链表的倒数第N个结点 instance = new _019_删除链表的倒数第N个结点();
-        ListNode head = ListNode.randomList(10);
-        ListNode.beautifulFormat(head);
+        ListNode head = ListNodeUtils.randomList(10);
+        ListNodeUtils.beautifulFormat(head);
         ListNode result = instance.solution1(head, 3);
-        ListNode.beautifulFormat(result);
+        ListNodeUtils.beautifulFormat(result);
     }
 
     /**

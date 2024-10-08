@@ -1,6 +1,7 @@
 package edu.hhuc.leetcode.normal;
 
 import edu.hhuc.leetcode.entity.ListNode;
+import edu.hhuc.leetcode.entity.ListNodeUtils;
 
 import java.util.Objects;
 import java.util.Stack;
@@ -15,9 +16,9 @@ import java.util.Stack;
  */
 public class _061_旋转链表 {
     public static void main(String[] args) {
-        ListNode head = ListNode.buildLinkedList(1, 2, 3, 4, 5);
+        ListNode head = ListNodeUtils.buildLinkedList(1, 2, 3, 4, 5);
         _061_旋转链表 instance = new _061_旋转链表();
-        ListNode.beautifulFormat(instance.solution2(head, 3));
+        ListNodeUtils.beautifulFormat(instance.solution2(head, 3));
     }
 
     /**

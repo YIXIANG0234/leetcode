@@ -1,6 +1,7 @@
 package edu.hhuc.leetcode.normal;
 
 import edu.hhuc.leetcode.entity.ListNode;
+import edu.hhuc.leetcode.entity.ListNodeUtils;
 
 /**
  * @program: leetcode
@@ -12,9 +13,9 @@ import edu.hhuc.leetcode.entity.ListNode;
  */
 public class _092_反转链表II {
     public static void main(String[] args) {
-        ListNode head = ListNode.buildLinkedList(1, 2, 3, 4, 5);
+        ListNode head = ListNodeUtils.buildLinkedList(1, 2, 3, 4, 5);
         _092_反转链表II instance = new _092_反转链表II();
-        ListNode.printLinkedList(instance.solution2(head, 2, 4));
+        ListNodeUtils.printLinkedList(instance.solution2(head, 2, 4));
     }
 
     /**

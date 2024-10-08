@@ -1,6 +1,7 @@
 package edu.hhuc.leetcode.normal;
 
 import edu.hhuc.leetcode.entity.ListNode;
+import edu.hhuc.leetcode.entity.ListNodeUtils;
 
 /**
  * @program: leetcode
@@ -13,8 +14,8 @@ import edu.hhuc.leetcode.entity.ListNode;
 public class _082_删除排序链表中的重复元素II {
     public static void main(String[] args) {
         _082_删除排序链表中的重复元素II instance = new _082_删除排序链表中的重复元素II();
-        ListNode head = ListNode.buildLinkedList(1, 2, 3, 3, 4, 4, 5);
-        ListNode.beautifulFormat(instance.solution1(head));
+        ListNode head = ListNodeUtils.buildLinkedList(1, 2, 3, 3, 4, 4, 5);
+        ListNodeUtils.beautifulFormat(instance.solution1(head));
     }
 
     public ListNode solution1(ListNode head) {

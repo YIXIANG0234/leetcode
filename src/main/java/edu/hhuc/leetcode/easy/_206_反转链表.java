@@ -1,13 +1,14 @@
 package edu.hhuc.leetcode.easy;
 
 import edu.hhuc.leetcode.entity.ListNode;
+import edu.hhuc.leetcode.entity.ListNodeUtils;
 
 public class _206_反转链表 {
 
     public static void main(String[] args) {
-        ListNode head = ListNode.buildLinkedList(1, 2, 3, 4, 5);
+        ListNode head = ListNodeUtils.buildLinkedList(1, 2, 3, 4, 5);
         _206_反转链表 instance = new _206_反转链表();
-        ListNode.printLinkedList(instance.solution2(head));
+        ListNodeUtils.printLinkedList(instance.solution2(head));
     }
     public ListNode solution1(ListNode head) {
         ListNode result = null;

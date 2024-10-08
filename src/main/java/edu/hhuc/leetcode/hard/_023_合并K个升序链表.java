@@ -1,6 +1,7 @@
 package edu.hhuc.leetcode.hard;
 
 import edu.hhuc.leetcode.entity.ListNode;
+import edu.hhuc.leetcode.entity.ListNodeUtils;
 
 import java.util.PriorityQueue;
 
@@ -15,12 +16,12 @@ import java.util.PriorityQueue;
 public class _023_合并K个升序链表 {
     public static void main(String[] args) {
         _023_合并K个升序链表 instance = new _023_合并K个升序链表();
-        ListNode node1 = ListNode.buildLinkedList(1, 4, 5);
-        ListNode node2 = ListNode.buildLinkedList(1, 3, 4);
-        ListNode node3 = ListNode.buildLinkedList(2, 6, 7);
+        ListNode node1 = ListNodeUtils.buildLinkedList(1, 4, 5);
+        ListNode node2 = ListNodeUtils.buildLinkedList(1, 3, 4);
+        ListNode node3 = ListNodeUtils.buildLinkedList(2, 6, 7);
         ListNode[] lists = {node1, node2, node3};
         ListNode result = instance.solution4(lists);
-        ListNode.printLinkedList(result);
+        ListNodeUtils.printLinkedList(result);
     }
 
 

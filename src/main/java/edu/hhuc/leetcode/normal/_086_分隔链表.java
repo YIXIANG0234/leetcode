@@ -1,6 +1,7 @@
 package edu.hhuc.leetcode.normal;
 
 import edu.hhuc.leetcode.entity.ListNode;
+import edu.hhuc.leetcode.entity.ListNodeUtils;
 
 /**
  * @program: leetcode
@@ -13,8 +14,8 @@ import edu.hhuc.leetcode.entity.ListNode;
 public class _086_分隔链表 {
     public static void main(String[] args) {
         _086_分隔链表 instance = new _086_分隔链表();
-        ListNode head = ListNode.buildLinkedList(1, 4, 3, 2, 5, 2);
-        ListNode.beautifulFormat(instance.solution1(head, 3));
+        ListNode head = ListNodeUtils.buildLinkedList(1, 4, 3, 2, 5, 2);
+        ListNodeUtils.beautifulFormat(instance.solution1(head, 3));
     }
 
     public ListNode solution1(ListNode head, int x) {
