@@ -18,7 +18,7 @@ public class _020_有效的括号 {
      */
     public boolean solution1(String s) {
         LinkedList<Character> stack = new LinkedList<>();
-        Map<Character, Character> map = new HashMap<>() {{
+        Map<Character, Character> map = new HashMap<Character, Character>() {{
             put(')', '(');
             put('}', '{');
             put(']', '[');
