@@ -27,12 +27,19 @@ public class TreeNodeUtils {
      * @return 二叉树根节点
      */
     public static TreeNode randomTree(int validNodeCount) {
+        return randomTree(validNodeCount, 100);
+    }
+
+    public static TreeNode randomTree(int validNodeCount, int bound) {
         Random random = new Random();
         int count = 0;
         List<Integer> data = new ArrayList<>();
-        int nullNum = random.nextInt(100);
+        int nullNum = random.nextInt(bound);
+        while (nullNum == 0) {
+            nullNum = random.nextInt(bound);
+        }
         while (count <= validNodeCount) {
-            int num = random.nextInt(100);
+            int num = random.nextInt(bound);
             if (num % nullNum == 0) {
                 data.add(null);
                 continue;
