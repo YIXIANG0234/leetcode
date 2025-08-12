@@ -3,7 +3,7 @@ package edu.hhuc.leetcode.normal;
 public class _005_最长回文子串 {
     public static void main(String[] args) {
         _005_最长回文子串 instance = new _005_最长回文子串();
-        System.out.println(instance.longestPalindrome("cbbd"));
+        System.out.println(instance.solution1("cbbd"));
     }
 
     /**
@@ -16,9 +16,9 @@ public class _005_最长回文子串 {
         String maxString = "";
         for (int i = 0; i < s.length(); i++) {
             for (int j = i; j < s.length(); j++) {
-                if (isPalindromic(s, i, j)) {
-                    String temp = s.substring(i, j + 1);
-                    maxString = maxString.length() > temp.length() ? maxString : temp;
+                // 是回文串且新回文串长度更长
+                if (isPalindromic(s, i, j) && (j - i + 1) > maxString.length()) {
+                    maxString = s.substring(i, j + 1);
                 }
             }
         }
@@ -52,20 +52,21 @@ public class _005_最长回文子串 {
      * @return
      */
     public String solution3(String s) {
-        String maxString = "";
-        int len = s.length();
-        int[][] dp = new int[len][len];
-        for (int right = 0; right < len; right++) {
+        int start = 0;
+        int end = 0;
+        boolean[][] dp = new boolean[s.length()][s.length()];
+        for (int right = 0; right < s.length(); right++) {
             for (int left = 0; left <= right; left++) {
-                if (s.charAt(right) == s.charAt(left) && (right - left <= 1 || dp[left + 1][right - 1] == 1)) {
-                    dp[left][right] = 1;
-                    if ((right - left + 1) > maxString.length()) {
-                        maxString = s.substring(left, right + 1);
+                if (s.charAt(left) == s.charAt(right) && (right - left <= 1 || dp[left + 1][right - 1])) {
+                    dp[left][right] = true;
+                    if ((right - left) > (end - start)) {
+                        start = left;
+                        end = right;
                     }
                 }
             }
         }
-        return maxString;
+        return s.substring(start, end + 1);
     }
 
     private boolean isPalindromic(String s, int start, int end) {
@@ -85,21 +86,5 @@ public class _005_最长回文子串 {
             right++;
         }
         return s.substring(left + 1, right);
-    }
-
-    public String longestPalindrome(String s) {
-        String maxString = "";
-        int len = s.length();
-        boolean[][] dp = new boolean[len][len];
-        for (int right = 0; right < s.length(); right++) {
-            for (int left = 0; left <= right; left++) {
-                if (s.charAt(left) == s.charAt(right) && (right - left <= 1 || dp[left + 1][right - 1])) {
-                    dp[left][right] = true;
-                    String temp = s.substring(left, right + 1);
-                    maxString = maxString.length() > temp.length() ? maxString : temp;
-                }
-            }
-        }
-        return maxString;
     }
 }

@@ -18,11 +18,10 @@ public class _020_有效的括号 {
      */
     public boolean solution1(String s) {
         LinkedList<Character> stack = new LinkedList<>();
-        Map<Character, Character> map = new HashMap<>() {{
-            put(')', '(');
-            put('}', '{');
-            put(']', '[');
-        }};
+        Map<Character, Character> map = new HashMap<>();
+        map.put(')', '(');
+        map.put('}', '{');
+        map.put(']', '[');
         for (int index = 0; index < s.length(); index++) {
             char ch = s.charAt(index);
             if (!map.containsKey(ch)) {
