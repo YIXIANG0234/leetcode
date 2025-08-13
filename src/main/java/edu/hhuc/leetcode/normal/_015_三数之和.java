@@ -46,6 +46,7 @@ public class _015_三数之和 {
         List<List<Integer>> result = new ArrayList<>();
         Arrays.sort(nums);
         for (int i = 0; i < nums.length; i++) {
+            // 去重，跳过本轮循环
             if (i != 0 && nums[i] == nums[i - 1]) {
                 continue;
             }

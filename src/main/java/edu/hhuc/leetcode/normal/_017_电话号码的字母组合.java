@@ -28,8 +28,8 @@ public class _017_电话号码的字母组合 {
         if ("".equals(digits)) {
             return result;
         }
-        String[] phones = {"abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
-        backtrack(result, 0, digits, new StringBuilder(""), phones);
+        String[] phones = {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+        backtrack(result, 0, digits, new StringBuilder(), phones);
         return result;
     }
 
@@ -38,7 +38,7 @@ public class _017_电话号码的字母组合 {
             result.add(temporary.toString());
             return;
         }
-        String s = phones[digits.charAt(index) - '0' - 2];
+        String s = phones[digits.charAt(index) - '0'];
         for (int i = 0; i < s.length(); i++) {
             temporary.append(s.charAt(i));
             backtrack(result, index + 1, digits, temporary, phones);
