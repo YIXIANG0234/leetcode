@@ -3,6 +3,7 @@ package edu.hhuc.leetcode.hard;
 import edu.hhuc.leetcode.entity.ListNode;
 import edu.hhuc.leetcode.entity.ListNodeUtils;
 
+import java.util.Comparator;
 import java.util.PriorityQueue;
 
 /**
@@ -37,10 +38,12 @@ public class _023_合并K个升序链表 {
         while (true) {
             int minIndex = -1;
             for (int i = 0; i < lists.length; i++) {
+                // 跳过遍历结束的节点，找到当前所有列表中的最小节点
                 if (lists[i] != null && (minIndex == -1 || lists[i].val <= lists[minIndex].val)) {
                     minIndex = i;
                 }
             }
+            // 如果minIndex=-1，证明已经处理结束了
             if (minIndex == -1) {
                 break;
             }
@@ -73,21 +76,21 @@ public class _023_合并K个升序链表 {
      * @return
      */
     public ListNode solution3(ListNode[] lists) {
-        PriorityQueue<ListNode> queue = new PriorityQueue<>((node1, node2) -> node1.val - node2.val);
-        for (int i = 0; i < lists.length; i++) {
-            if (lists[i] != null) {
-                queue.offer(lists[i]);
-            }
-        }
         ListNode dummy = new ListNode();
         ListNode current = dummy;
+        PriorityQueue<ListNode> queue = new PriorityQueue<>(Comparator.comparing(x -> x.val));
+        for (int i = 0; i < lists.length; i++) {
+            if (lists[i] != null) {
+                queue.add(lists[i]);
+            }
+        }
         while (!queue.isEmpty()) {
-            ListNode top = queue.poll();
-            current.next = top;
+            ListNode node = queue.poll();
+            current.next = node;
             current = current.next;
-            top = top.next;
-            if (top != null) {
-                queue.offer(top);
+
+            if (node.next != null) {
+                queue.add(node.next);
             }
         }
         return dummy.next;
@@ -119,24 +122,24 @@ public class _023_合并K个升序链表 {
     /**
      * 合并两个有序链表
      *
-     * @param a
-     * @param b
+     * @param list1
+     * @param list2
      * @return
      */
-    private ListNode mergeList(ListNode a, ListNode b) {
-        ListNode dummy = new ListNode(-1);
-        ListNode tail = dummy;
-        while (a != null && b != null) {
-            if (a.val <= b.val) {
-                tail.next = a;
-                a = a.next;
+    private ListNode mergeList(ListNode list1, ListNode list2) {
+        ListNode dummy = new ListNode();
+        ListNode current = dummy;
+        while (list1 != null && list2 != null) {
+            if (list1.val <= list2.val) {
+                current.next = list1;
+                list1 = list1.next;
             } else {
-                tail.next = b;
-                b = b.next;
+                current.next = list2;
+                list2 = list2.next;
             }
-            tail = tail.next;
+            current = current.next;
         }
-        tail.next = a != null ? a : b;
+        current.next = list1 != null ? list1 : list2;
         return dummy.next;
     }
 }
