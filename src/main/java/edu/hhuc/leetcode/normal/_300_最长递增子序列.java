@@ -8,14 +8,16 @@ public class _300_最长递增子序列 {
 
     }
 
+    /**
+     * 动态规划，dp[i]表示以下标为i的位置最长的递增序列
+     *
+     * @param nums
+     * @return
+     */
     public int solution1(int[] nums) {
-        if (nums.length == 0) {
-            return 0;
-        }
+        int maxLength = 0;
         int[] dp = new int[nums.length];
-        dp[0] = 1;
-        int maxLength = 1;
-        for (int i = 1; i < nums.length; i++) {
+        for (int i = 0; i < nums.length; i++) {
             dp[i] = 1;
             for (int j = 0; j < i; j++) {
                 if (nums[i] > nums[j]) {

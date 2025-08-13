@@ -1,6 +1,7 @@
 package edu.hhuc.leetcode.easy;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class _001_两数之和 {
     /**
@@ -29,7 +30,7 @@ public class _001_两数之和 {
      * @return
      */
     public int[] solution2(int[] nums, int target) {
-        HashMap<Integer, Integer> map = new HashMap<>();
+        Map<Integer, Integer> map = new HashMap<>();
         for (int i = 0; i < nums.length; i++) {
             // 判断遍历过的元素中，是否有和当前元素匹配的
             if (map.containsKey(target - nums[i])) {
