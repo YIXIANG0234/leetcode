@@ -14,7 +14,7 @@ public class _034_在排序数组中查找元素的第一个和最后一个位�
         int left = 0;
         int right = nums.length - 1;
         while (left <= right) {
-            int mid = left + (right - left) / 2;
+            int mid = (left + right) / 2;
             if (target < nums[mid]) {
                 right = mid - 1;
             } else if (target > nums[mid]) {
@@ -22,10 +22,10 @@ public class _034_在排序数组中查找元素的第一个和最后一个位�
             } else {
                 int start = mid;
                 int end = mid;
-                while (start >= 0 && nums[start] == target) {
+                while (start >= 0 && nums[start] == nums[mid]) {
                     start--;
                 }
-                while (end < nums.length && nums[end] == target) {
+                while (end < nums.length && nums[end] == nums[mid]) {
                     end++;
                 }
                 return new int[]{start + 1, end - 1};

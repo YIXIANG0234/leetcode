@@ -1,6 +1,7 @@
 package edu.hhuc.leetcode.normal;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -14,7 +15,7 @@ import java.util.List;
 public class _039_组合总和 {
     public static void main(String[] args) {
         _039_组合总和 instance = new _039_组合总和();
-        System.out.println(instance.solution1(new int[]{8, 5, 3, 2}, 8));
+        System.out.println(instance.solution2(new int[]{2, 3, 6, 7}, 7));
     }
 
     /**

@@ -4,7 +4,7 @@ public class _033_搜索旋转排序数组 {
     public static void main(String[] args) {
         _033_搜索旋转排序数组 instance = new _033_搜索旋转排序数组();
         int[] nums = {4, 5, 6, 7, 0, 1, 2};
-        System.out.println(instance.solution3(nums, 0));
+        System.out.println(instance.solution2(nums, 0));
     }
 
     /**
@@ -24,45 +24,13 @@ public class _033_搜索旋转排序数组 {
     }
 
     /**
-     * 双指针遍历
-     *
-     * @param nums
-     * @param target
-     * @return
-     */
-    public int solution2(int[] nums, int target) {
-        int left = 0;
-        int right = nums.length - 1;
-        while (left <= right) {
-            if (target == nums[left]) {
-                return left;
-            } else if (target == nums[right]) {
-                return right;
-            } else if (target < nums[left] && target > nums[right]) {
-                return -1;
-            } else if (target > nums[left]) {
-                if ((left + 1) < nums.length && nums[left] > nums[left + 1]) {
-                    return -1;
-                }
-                left++;
-            } else {
-                if ((right - 1) >= 0 && nums[right] < nums[right - 1]) {
-                    return -1;
-                }
-                right--;
-            }
-        }
-        return -1;
-    }
-
-    /**
      * 虽然整体无序，但是局部是有序的，仍然可以使用二分法进行查找
      *
      * @param nums
      * @param target
      * @return
      */
-    public int solution3(int[] nums, int target) {
+    public int solution2(int[] nums, int target) {
         int length = nums.length;
         int left = 0;
         int right = length - 1;
@@ -72,7 +40,7 @@ public class _033_搜索旋转排序数组 {
                 return mid;
             }
             // 左边部分有序
-            if (nums[mid] >= nums[left]) {
+            if (nums[left] <= nums[mid]) {
                 // 在左边找
                 if (nums[left] <= target && target < nums[mid]) {
                     right = mid - 1;
@@ -81,7 +49,7 @@ public class _033_搜索旋转排序数组 {
                 }
             } else {
                 // 右边部分有序
-                if (nums[mid] < target && target <= nums[length - 1]) {
+                if (nums[mid] < target && target <= nums[right]) {
                     left = mid + 1;
                 } else {
                     right = mid - 1;
