@@ -28,13 +28,36 @@ public class _062_不同路径 {
     }
 
     /**
-     * 回溯解法，会超时
+     * 动态规划的滚动数组解法，可以节省部分空间
      *
      * @param m
      * @param n
      * @return
      */
     public int solution2(int m, int n) {
+        // 只有一行
+        int[] dp = new int[n];
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (i == 0 || j == 0) {
+                    dp[j] = 1;
+                } else {
+                    // dp[j - 1]: 左边一个格子的路径数，dp[j]: 上一个格子的路径数
+                    dp[j] = dp[j - 1] + dp[j];
+                }
+            }
+        }
+        return dp[n - 1];
+    }
+
+    /**
+     * 回溯解法，会超时
+     *
+     * @param m
+     * @param n
+     * @return
+     */
+    public int solution3(int m, int n) {
         return backtrace(m, n, 0, 0);
     }
 
@@ -58,5 +81,4 @@ public class _062_不同路径 {
         }
         return backtrace(m, n, i + 1, j) + backtrace(m, n, i, j + 1);
     }
-
 }

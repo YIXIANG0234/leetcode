@@ -57,5 +57,4 @@ public class _070_爬楼梯 {
         }
         return solution3(n - 1) + solution3(n - 2);
     }
-
 }
