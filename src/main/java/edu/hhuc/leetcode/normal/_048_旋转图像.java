@@ -10,9 +10,7 @@ package edu.hhuc.leetcode.normal;
 public class _048_旋转图像 {
     public static void main(String[] args) {
         _048_旋转图像 instance = new _048_旋转图像();
-        int[][] matrix = {{1, 2, 3},
-                {4, 5, 6},
-                {7, 8, 9}};
+        int[][] matrix = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
         instance.solution1(matrix);
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[i].length; j++) {
@@ -60,6 +58,7 @@ public class _048_旋转图像 {
         }
         // 然后沿左上-右下的对角线翻转
         for (int i = 0; i < n; i++) {
+            // 很重要，这里是j<i, 而不是j<n，如果j<n的话就又翻转回去了
             for (int j = 0; j < i; j++) {
                 int temp = matrix[i][j];
                 matrix[i][j] = matrix[j][i];

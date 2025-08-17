@@ -27,51 +27,34 @@ public class _049_字母异位词分组 {
     public List<List<String>> solution1(String[] strs) {
         List<List<String>> result = new ArrayList<>();
         int len = strs.length;
-        short[] hit = new short[len];
+        boolean[] processed = new boolean[len];
         for (int i = 0; i < len; i++) {
-            if (hit[i] == -1) {
+            if (processed[i]) {
                 continue;
             }
             List<String> list = new ArrayList<>();
-            hit[i] = -1;
+            processed[i] = true;
             list.add(strs[i]);
             result.add(list);
             for (int j = i + 1; j < len; j++) {
-                if (hit[j] == -1) {
+                if (processed[j]) {
                     continue;
                 }
                 if (similar(strs[i], strs[j])) {
                     list.add(strs[j]);
-                    hit[j] = -1;
+                    processed[j] = true;
                 }
             }
         }
         return result;
     }
 
-    private boolean similar(String s1, String s2) {
-        if (s1.length() != s2.length()) {
-            return false;
-        }
-        int len = s1.length();
-        short[] hit = new short[len];
-        int count = 0;
-        for (int i = 0; i < len; i++) {
-            char ch = s1.charAt(i);
-            for (int j = 0; j < len; j++) {
-                if (hit[j] == -1) {
-                    continue;
-                }
-                if (ch == s2.charAt(j)) {
-                    hit[j] = -1;
-                    count++;
-                    break;
-                }
-            }
-        }
-        return count == len;
-    }
-
+    /**
+     * 将每个字符串排序后作为key，所有的字母异位词得到的key是一样的，把字母异位词出现的次数作为value
+     *
+     * @param strs
+     * @return
+     */
     public List<List<String>> solution2(String[] strs) {
         Map<String, List<String>> map = new HashMap<>();
         for (int i = 0; i < strs.length; i++) {
@@ -83,5 +66,55 @@ public class _049_字母异位词分组 {
             map.put(key, list);
         }
         return new ArrayList<>(map.values());
+    }
+
+    /**
+     * 思路和solution2是一样的，只不过这时字母异位词的key，是按照字母出现的次数得到的
+     *
+     * @param strs
+     * @return
+     */
+    public List<List<String>> solution3(String[] strs) {
+        Map<String, List<String>> map = new HashMap<>();
+        for (int i = 0; i < strs.length; i++) {
+            String key = similarKey(strs[i]);
+            List<String> list = map.getOrDefault(key, new ArrayList<>());
+            list.add(strs[i]);
+            map.put(key, list);
+        }
+        return new ArrayList<>(map.values());
+    }
+
+    private boolean similar(String s1, String s2) {
+        if (s1.length() != s2.length()) {
+            return false;
+        }
+        int n = s1.length();
+        int[] count = new int[26];
+        for (int i = 0; i < n; i++) {
+            count[s1.charAt(i) - 'a']++;
+            count[s2.charAt(i) - 'a']--;
+        }
+        for (int i = 0; i < count.length; i++) {
+            if (count[i] != 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private String similarKey(String s) {
+        int[] count = new int[26];
+        for (int i = 0; i < s.length(); i++) {
+            count[s.charAt(i) - 'a']++;
+        }
+        StringBuilder key = new StringBuilder();
+        for (int i = 0; i < count.length; i++) {
+            if (count[i] != 0) {
+                char ch = (char) (i + 'a');
+                key.append(ch).append(count[i]);
+            }
+        }
+        return key.toString();
     }
 }

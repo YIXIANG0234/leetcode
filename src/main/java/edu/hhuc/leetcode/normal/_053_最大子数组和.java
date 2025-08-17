@@ -33,12 +33,10 @@ public class _053_最大子数组和 {
      * @return
      */
     public int solution2(int[] nums) {
-        int length = nums.length;
-        int[] dp = new int[length];
-        dp[0] = nums[0];
-        int maxSum = dp[0];
-        for (int i = 1; i < length; i++) {
-            dp[i] = Math.max(nums[i], dp[i - 1] + nums[i]);
+        int maxSum = nums[0];
+        int[] dp = new int[nums.length];
+        for (int i = 0; i < nums.length; i++) {
+            dp[i] = i == 0 ? nums[i] : Math.max(dp[i - 1] + nums[i], nums[i]);
             maxSum = Math.max(maxSum, dp[i]);
         }
         return maxSum;
@@ -65,6 +63,7 @@ public class _053_最大子数组和 {
 
     /**
      * 贪心算法
+     *
      * @param nums
      * @return
      */
@@ -75,6 +74,7 @@ public class _053_最大子数组和 {
             if (sum > 0) {
                 sum = sum + nums[i];
             } else {
+                // 如果说sum为负数，则前面的子数组的结果对后续没有任何收益，因此重置
                 sum = nums[i];
             }
             maxSum = Math.max(maxSum, sum);
