@@ -1,6 +1,7 @@
 package edu.hhuc.leetcode.hard;
 
-// TODO: 2024/10/6 更优的解法未解决 
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author guwanghuai
@@ -14,49 +15,89 @@ public class _076_最小覆盖子串 {
         _076_最小覆盖子串 instance = new _076_最小覆盖子串();
         String s = "wegdtzwabazduwwdysdetrrctotpcepalxdewzezbfewbabbseinxbqqplitpxtcwwhuyntbtzxwzyaufihclztckdwccpeyonumbpnuonsnnsjscrvpsqsftohvfnvtbphcgxyumqjzltspmphefzjypsvugqqjhzlnylhkdqmolggxvneaopadivzqnpzurmhpxqcaiqruwztroxtcnvhxqgndyozpcigzykbiaucyvwrjvknifufxducbkbsmlanllpunlyohwfsssiazeixhebipfcdqdrcqiwftutcrbxjthlulvttcvdtaiwqlnsdvqkrngvghupcbcwnaqiclnvnvtfihylcqwvderjllannflchdklqxidvbjdijrnbpkftbqgpttcagghkqucpcgmfrqqajdbynitrbzgwukyaqhmibpzfxmkoeaqnftnvegohfudbgbbyiqglhhqevcszdkokdbhjjvqqrvrxyvvgldtuljygmsircydhalrlgjeyfvxdstmfyhzjrxsfpcytabdcmwqvhuvmpssingpmnpvgmpletjzunewbamwiirwymqizwxlmojsbaehupiocnmenbcxjwujimthjtvvhenkettylcoppdveeycpuybekulvpgqzmgjrbdrmficwlxarxegrejvrejmvrfuenexojqdqyfmjeoacvjvzsrqycfuvmozzuypfpsvnzjxeazgvibubunzyuvugmvhguyojrlysvxwxxesfioiebidxdzfpumyon";
         String t = "ozgzyywxvtublcl";
-        System.out.println(instance.solution1(s, t));
+        System.out.println(instance.solution2(s, t));
     }
 
     /**
-     * 暴力枚举
+     * 暴力枚举, 会超时
      *
      * @param s
      * @param t
      * @return
      */
     public String solution1(String s, String t) {
-        int len = t.length();
-        int left = -1;
-        int right = -1;
+        int start = -1;
+        int minLength = Integer.MAX_VALUE;
+        Map<Character, Integer> map = new HashMap<>();
+        for (int i = 0; i < t.length(); i++) {
+            char ch = t.charAt(i);
+            map.put(ch, map.getOrDefault(ch, 0) + 1);
+        }
         for (int i = 0; i < s.length(); i++) {
-            for (int j = i + len - 1; j < s.length(); j++) {
-                if (contains(s, i, j, t)) {
-                    if (left == -1 || (j - i) < (right - left)) {
-                        left = i;
-                        right = j;
-                    }
+            for (int j = i + t.length() - 1; j < s.length(); j++) {
+                if (valid(s, i, j, new HashMap<>(map)) && j - i + 1 < minLength) {
+                    start = i;
+                    minLength = j - i + 1;
                 }
             }
         }
-        return left == -1 ? "" : s.substring(left, right + 1);
+        return start == -1 ? "" : s.substring(start, start + minLength);
     }
 
-    private boolean contains(String s, int left, int right, String t) {
-        boolean[] checked = new boolean[t.length()];
-        while (left <= right) {
-            for (int j = 0; j < t.length(); j++) {
-                if (s.charAt(left) == t.charAt(j) && !checked[j]) {
-                    checked[j] = true;
-                    break;
+    private boolean valid(String s, int left, int right, Map<Character, Integer> map) {
+        for (int i = left; i <= right; i++) {
+            char ch = s.charAt(i);
+            map.put(ch, map.getOrDefault(ch, 0) - 1);
+        }
+        return map.values().stream().allMatch(x -> x <= 0);
+    }
+
+    /**
+     * 双指针+滑动窗口
+     *
+     * @param s
+     * @param t
+     * @return
+     */
+    public String solution2(String s, String t) {
+        int start = -1;
+        int minLength = Integer.MAX_VALUE;
+        Map<Character, Integer> need = new HashMap<>();
+        Map<Character, Integer> window = new HashMap<>();
+        int left = 0;
+        int right = 0;
+        int validCount = 0;
+        for (int i = 0; i < t.length(); i++) {
+            need.merge(t.charAt(i), 1, Integer::sum);
+        }
+        // 移动右指针，直到窗口能完全覆盖子串
+        while (right < s.length()) {
+            char ch = s.charAt(right);
+            if (need.containsKey(ch)) {
+                window.merge(ch, 1, Integer::sum);
+                if (window.get(ch).equals(need.get(ch))) {
+                    validCount++;
                 }
             }
-            left++;
-        }
-        for (boolean b : checked) {
-            if (!b) {
-                return false;
+            // 当前窗口能完全覆盖字串时，开始缩小左边界，寻找最小覆盖子串
+            while (validCount == need.size()) {
+                ch = s.charAt(left);
+                if (window.containsKey(ch)) {
+                    window.put(ch, window.get(ch) - 1);
+                    // 判断当前窗口是否还能覆盖子串
+                    if (window.get(ch) < need.get(ch)) {
+                        validCount--;
+                    }
+                }
+                // 更新最小覆盖子串位置和长度
+                if (right - left + 1 < minLength) {
+                    start = left;
+                    minLength = right - left + 1;
+                }
+                left++;
             }
+            right++;
         }
-        return true;
+        return start == -1 ? "" : s.substring(start, start + minLength);
     }
 }
