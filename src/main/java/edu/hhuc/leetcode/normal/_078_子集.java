@@ -85,4 +85,33 @@ public class _078_子集 {
         }
         return result;
     }
+
+    /**
+     * 回溯的另一种写法，感觉更好理解一点
+     *
+     * @param nums
+     * @return
+     */
+    public List<List<Integer>> solution4(int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
+        result.add(new ArrayList<>());
+        // 枚举当前元素个数为i的组合
+        for (int i = 1; i <= nums.length; i++) {
+            // 计算个数为i的组合
+            backtrace3(nums, 0, result, i, new ArrayList<>());
+        }
+        return result;
+    }
+
+    private void backtrace3(int[] nums, int index, List<List<Integer>> result, int n, List<Integer> list) {
+        if (list.size() == n) {
+            result.add(new ArrayList<>(list));
+            return;
+        }
+        for (int i = index; i < nums.length; i++) {
+            list.add(nums[i]);
+            backtrace3(nums, i + 1, result, n, list);
+            list.remove(list.size() - 1);
+        }
+    }
 }
