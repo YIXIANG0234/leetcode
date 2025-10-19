@@ -14,8 +14,7 @@ public class _078_子集 {
     public static void main(String[] args) {
         _078_子集 instance = new _078_子集();
         int[] nums = {1, 2, 3};
-        System.out.println(instance.solution3(nums));
-        System.out.println(Integer.toBinaryString(1 << 10));
+        System.out.println(instance.solution1(nums));
     }
 
     /**

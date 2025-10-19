@@ -13,7 +13,7 @@ public class _084_柱形图中最大的矩形 {
     public static void main(String[] args) {
         _084_柱形图中最大的矩形 instance = new _084_柱形图中最大的矩形();
         int[] heights = {2, 1, 2, 6, 2, 3};
-        System.out.println(instance.solution1(heights));
+        System.out.println(instance.solution3(heights));
     }
 
     /**
@@ -76,6 +76,4 @@ public class _084_柱形图中最大的矩形 {
         }
         return maxArea;
     }
-
-
 }
