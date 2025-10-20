@@ -7,13 +7,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
+import java.util.concurrent.atomic.AtomicLong;
 
 public class _098_验证二叉搜索树 {
     public static void main(String[] args) {
         _098_验证二叉搜索树 instance = new _098_验证二叉搜索树();
         TreeNode root = TreeNodeUtils.buildTree(Arrays.asList(5, 4, 6, null, null, 3, 7));
         TreeNodeUtils.prettyPrintTree(root);
-        System.out.println(instance.solution1(root));
+        System.out.println(instance.solution4(root));
     }
 
     /**
@@ -90,4 +91,30 @@ public class _098_验证二叉搜索树 {
         }
         return validTreeRange(root.left, min, root.val) && validTreeRange(root.right, root.val, max);
     }
+
+    /**
+     * 中序遍历的递归解法
+     *
+     * @param root
+     * @return
+     */
+    public boolean solution4(TreeNode root) {
+        return dfs(root, new AtomicLong(Long.MIN_VALUE));
+    }
+
+    private boolean dfs(TreeNode root, AtomicLong prev) {
+        if (root == null) {
+            return true;
+        }
+        if (!dfs(root.left, prev)) {
+            return false;
+        }
+        if (prev.get() >= root.val) {
+            return false;
+        }
+        prev.set(root.val);
+        return dfs(root.right, prev);
+    }
+
+
 }
