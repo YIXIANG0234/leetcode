@@ -57,15 +57,15 @@ public class _102_二叉树的层序遍历 {
         return result;
     }
 
-    public void dfs(TreeNode root, int level, List<List<Integer>> result) {
+    public void dfs(TreeNode root, int depth, List<List<Integer>> result) {
         if (root == null) {
             return;
         }
-        if (result.size() < level) {
+        if (result.size() < depth) {
             result.add(new ArrayList<>());
         }
-        result.get(level - 1).add(root.val);
-        dfs(root.left, level + 1, result);
-        dfs(root.right, level + 1, result);
+        result.get(depth - 1).add(root.val);
+        dfs(root.left, depth + 1, result);
+        dfs(root.right, depth + 1, result);
     }
 }
